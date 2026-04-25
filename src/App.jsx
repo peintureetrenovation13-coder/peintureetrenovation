@@ -71,7 +71,7 @@ const css = `
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Dancing+Script:wght@600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=Inter:wght@300;400;500&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:Inter,sans-serif;background:#FAFAFA;color:#1A1A1A;overflow-x:hidden;}
+body{font-family:Inter,sans-serif;background:#FAF7F2;color:#1A1A1A;overflow-x:hidden;}
 .nav{position:sticky;top:0;z-index:200;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;background:#0A0A0A;border-bottom:2px solid #C8973A;}
 .nav-logo{cursor:pointer;display:flex;align-items:center;gap:12px;}
 .nav-links{display:flex;gap:16px;align-items:center;}
@@ -84,30 +84,30 @@ body{font-family:Inter,sans-serif;background:#FAFAFA;color:#1A1A1A;overflow-x:hi
 .mob-menu.open{display:flex;}
 .mob-menu button,.mob-menu a{font-size:14px;color:rgba(255,255,255,.8);text-decoration:none;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1);background:none;border-left:none;border-right:none;border-top:none;cursor:pointer;font-family:Inter;text-align:left;width:100%;letter-spacing:.05em;}
 .mob-cta{background:#C8973A!important;color:#fff!important;text-align:center!important;margin-top:12px;padding:14px!important;border:none!important;}
-.hero{display:grid;grid-template-columns:55% 45%;min-height:calc(100vh - 64px);background:#0A0A0A;}
+.hero{display:grid;grid-template-columns:48% 52%;min-height:calc(100vh - 64px);background:#0A0A0A;}
 .hero-l{padding:4rem 4% 4rem 6%;display:flex;flex-direction:column;justify-content:center;border-right:1px solid rgba(255,255,255,.1);position:relative;}
 .hero-l::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,151,58,.05) 0%,transparent 60%);pointer-events:none;}
-.hero-eyebrow{font-size:10px;letter-spacing:.25em;animation:slideDown 1s ease .2s both;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:24px;display:flex;align-items:center;gap:12px;}
+.hero-eyebrow{font-size:10px;letter-spacing:.25em;animation:sweepFromTop 1.4s cubic-bezier(.16,1,.3,1) .2s both;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:24px;display:flex;align-items:center;gap:12px;}
 .hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:#C8973A;}
-.hero-title{font-family:"Cormorant Garamond","Playfair Display",serif;font-style:italic;font-size:clamp(4rem,7vw,8rem);font-weight:700;line-height:.88;color:#fff;margin-bottom:8px;animation:fadeUp 1.4s cubic-bezier(.16,1,.3,1) .2s both;}
+.hero-title{font-family:"Cormorant Garamond","Playfair Display",serif;font-style:italic;font-size:clamp(4rem,7vw,8rem);font-weight:700;line-height:.88;color:#fff;margin-bottom:8px;animation:sweepFromLeft 2s cubic-bezier(.16,1,.3,1) .3s both;}
 .hero-title em{color:#C8973A;}
-.hero-sub{font-family:"Dancing Script",cursive;font-size:clamp(1.6rem,2.5vw,2.6rem);font-weight:600;color:#C8973A;margin-bottom:18px;animation:fadeLeft 1.2s cubic-bezier(.16,1,.3,1) 1s both;}
-.hero-location{display:inline-flex;animation:fadeIn .8s ease 1.6s both;align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;}
+.hero-sub{font-family:"Dancing Script",cursive;font-size:clamp(1.6rem,2.5vw,2.6rem);font-weight:600;color:#C8973A;margin-bottom:18px;animation:sweepFromRight 2s cubic-bezier(.16,1,.3,1) 1.2s both;}
+.hero-location{display:inline-flex;animation:sweepFromBottom 1.2s ease 2.2s both;align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px;}
 .hero-location::before{content:"📍";}
-.hero-tags{display:flex;flex-direction:column;gap:5px;margin-bottom:20px;animation:fadeIn .8s ease 1.9s both;}
+.hero-tags{display:flex;flex-direction:column;gap:5px;margin-bottom:20px;animation:sweepFromBottom 1.2s ease 2.6s both;}
 .hero-tag{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:8px;}
 .hero-tag::before{content:"—";color:#C8973A;}
-.hero-divider{width:60px;height:1px;background:#C8973A;margin:16px 0;animation:lineGrow 1.2s ease 2.2s both;}
-.hero-logos{display:flex;align-items:center;gap:16px;margin-bottom:26px;animation:fadeUp 1s ease 2.5s both;padding:12px 0;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);}
+.hero-divider{width:60px;height:1px;background:#C8973A;margin:16px 0;animation:lineGrow 1.8s ease 3s both;}
+.hero-logos{display:flex;align-items:center;gap:16px;margin-bottom:26px;animation:sweepFromBottom 1.3s ease 3.4s both;padding:12px 0;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);}
 .mda-wrap{background:#fff;padding:5px 10px;border-radius:2px;display:inline-flex;align-items:center;}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp 1s ease 2.8s both;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;animation:sweepFromBottom 1.3s ease 3.8s both;}
 .btn-gold{background:#C8973A;color:#fff;padding:11px 26px;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid #C8973A;cursor:pointer;font-family:Inter;transition:.2s;display:inline-block;text-decoration:none;}
 .btn-gold:hover{background:transparent;color:#C8973A;}
 .btn-outline{background:transparent;color:#fff;padding:11px 26px;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid rgba(255,255,255,.3);cursor:pointer;font-family:Inter;transition:.2s;}
 .btn-outline:hover{border-color:#fff;}
 .btn-black{background:#0A0A0A;color:#fff;padding:11px 24px;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid #0A0A0A;cursor:pointer;font-family:Inter;transition:.2s;}
 .btn-black:hover{background:transparent;color:#0A0A0A;}
-.hero-r{position:relative;overflow:hidden;animation:fadeRight 1.8s cubic-bezier(.16,1,.3,1) .4s both;}
+.hero-r{position:relative;overflow:hidden;animation:sweepFromRight 2.2s cubic-bezier(.16,1,.3,1) .5s both;}
 .hero-r img{width:100%;height:100%;object-fit:cover;display:block;}
 .hero-r::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,10,.35) 0%,transparent 40%);}
 .hero-badge{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.12);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2);padding:8px 18px;border-radius:2px;display:flex;align-items:center;gap:10px;white-space:nowrap;z-index:2;}
@@ -141,8 +141,8 @@ body{font-family:Inter,sans-serif;background:#FAFAFA;color:#1A1A1A;overflow-x:hi
 .gal-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding-top:20px;}
 .gal-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding-top:20px;}
 .gc{position:relative;overflow:hidden;cursor:pointer;border-radius:2px;aspect-ratio:1;}
-.gc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
-.gc:hover img{transform:scale(1.08);}
+.gc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.25,.46,.45,.94);}
+.gc:hover img{transform:scale(1.06);}
 .gc-ov{position:absolute;inset:0;background:rgba(0,0,0,.38);opacity:0;transition:.3s;display:flex;align-items:center;justify-content:center;font-size:22px;}
 .gc:hover .gc-ov{opacity:1;}
 .gc-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.7),transparent);padding:20px 10px 8px;opacity:0;transition:.3s;}
@@ -202,16 +202,34 @@ body{font-family:Inter,sans-serif;background:#FAFAFA;color:#1A1A1A;overflow-x:hi
 .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .city{font-size:10px;padding:2px 7px;border:1px solid #DEDEDE;color:#555;}
 .footer{border-top:1px solid #DEDEDE;padding:2rem 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeLeft{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:translateX(0)}}
-@keyframes fadeRight{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:translateX(0)}}
+/* Scroll animations */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-50px);transition:opacity .9s ease,transform .9s ease;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(50px);transition:opacity .9s ease,transform .9s ease;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+/* Back to top */
+.back-top{position:fixed;bottom:28px;right:28px;z-index:150;width:44px;height:44px;background:#0A0A0A;color:#C8973A;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:all .3s;opacity:0;pointer-events:none;}
+.back-top.show{opacity:1;pointer-events:auto;}
+.back-top:hover{background:#C8973A;color:#fff;transform:translateY(-3px);}
+/* Featured photo */
+.cat-featured{width:100%;height:240px;overflow:hidden;border-radius:2px;margin-top:16px;margin-bottom:8px;position:relative;cursor:pointer;}
+.cat-featured img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.25,.46,.45,.94);}
+.cat-featured:hover img{transform:scale(1.04);}
+.cat-featured-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.7),transparent);padding:20px 16px 12px;color:#fff;font-family:"Dancing Script",cursive;font-size:1.4rem;font-weight:700;}
+.cat-featured-sub{font-size:10px;font-family:Inter,sans-serif;font-weight:300;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:2px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(76,175,80,.5)}50%{box-shadow:0 0 0 6px rgba(76,175,80,0)}}
-@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes scaleIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
-@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
 @keyframes lineGrow{from{width:0}to{width:60px}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+/* Traversée pleine page */
+@keyframes sweepFromLeft{from{opacity:0;transform:translateX(-100vw)}to{opacity:1;transform:translateX(0)}}
+@keyframes sweepFromRight{from{opacity:0;transform:translateX(100vw)}to{opacity:1;transform:translateX(0)}}
+@keyframes sweepFromBottom{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sweepFromTop{from{opacity:0;transform:translateY(-60px)}to{opacity:1;transform:translateY(0)}}
 .hero-cursor{display:inline-block;width:3px;height:.85em;background:#C8973A;margin-left:2px;animation:blink 1s step-end infinite;vertical-align:text-bottom;}
 @media(max-width:768px){
   .nav{height:58px;padding:0 4%;}.nav-links{display:none;}.burger{display:flex;}.mob-menu{top:58px;}
@@ -256,7 +274,42 @@ const timeline=[
 ];
 
 // ═══ GALERIE PAR CATÉGORIES ═══
+const catFeatured = {
+  sdb:         {img:I_SDB2,         label:"Salle de bain rénovée",       sub:"Baignoire & béton ciré"},
+  trompeloeil: {img:I_FACADE_APRES, label:"Trompe l'Œil",               sub:"Porte, volets & rambarde peints"},
+  avantapres:  {img:I_AVANT_MAISON, label:"Avant / Après",               sub:"5 projets comparatifs"},
+  renovation:  {img:I_SALON_HABITE, label:"Rénovation complète",          sub:"De l'ancien au contemporain"},
+  chantiers:   {img:I_VILLA_APRES,  label:"Chantiers réalisés",           sub:"Du gros œuvre aux finitions"},
+  art:         {img:I_FEMME_FLEURS, label:"Art & Décoration",             sub:"Toiles, fresques & graffitis"},
+};
+
 const galCats = {
+  sdb: {
+    label: "Salles de bain", icon: "🚿",
+    items: [
+      {img:I_SDB_APRES,       label:"Salle de bain – APRÈS douche italienne", loc:"Région PACA"},
+      {img:I_SDB1,            label:"Salle de bain épurée",                  loc:"Pays d\'Aix"},
+      {img:I_SDB2,            label:"Baignoire béton ciré",                  loc:"Pays d\'Aix"},
+      {img:I_SDB_TURQUOISE,   label:"Carrelage hexagonal turquoise",         loc:"Région PACA"},
+      {img:I_SDB_BEIGE,       label:"Salle de bain moderne",                 loc:"Région PACA"},
+        ]
+  },
+  chantiers: {
+    label: "Chantiers", icon: "🔨",
+    items: [
+      {img:I_VILLA_CHANTIER1, label:"Villa – enduit intérieur",        loc:"Pays d\'Aix"},
+      {img:I_VILLA_CHANTIER2, label:"Villa – peinture en cours",       loc:"Pays d\'Aix"},
+      {img:I_CHANTIER,        label:"Pose placo & plomberie",          loc:"Peynier"},
+      {img:I_SDB_PENDANT,     label:"Pose niches placo",               loc:"Région PACA"},
+      {img:I_PLACO_VOLETS,    label:"Chantier placo",                  loc:"Région PACA"},
+      {img:I_PLACO_ARCHES,    label:"Plâtrerie – arches",              loc:"Région PACA"},
+      {img:I_SALON_TV_CHANTIER,label:"Pose meuble TV placo",           loc:"Région PACA"},
+      {img:I_DEMOLITION,      label:"Gros œuvre – démolition",         loc:"Région PACA"},
+      {img:I_CHANTIER2,       label:"Gros œuvre – étais nuit",         loc:"Région PACA"},
+      {img:I_CHAMBRE_OVALE_AVANT, label:"Chambre ovale – avant ragréage", loc:"Région PACA"},
+      {img:I_CHAMBRE_RAGREAGE,   label:"Chambre ovale – ragréage",       loc:"Région PACA"},
+    ]
+  },
   renovation: {
     label: "Rénovation", icon: "🏠",
     items: [
@@ -275,31 +328,6 @@ const galCats = {
       {img:I_MAISON_PARQUET,  label:"Rénové à neuf – parquet chêne",   loc:"Région PACA"},
       {img:I_PARQUET,         label:"Vitrification parquet",           loc:"Marseille"},
       {img:I_CARREAUX,        label:"Carreaux de ciment anciens",      loc:"Région PACA"},
-    ]
-  },
-  sdb: {
-    label: "Salles de bain", icon: "🚿",
-    items: [
-      {img:I_SDB1,            label:"Salle de bain épurée",            loc:"Pays d\'Aix"},
-      {img:I_SDB2,            label:"Baignoire béton ciré",            loc:"Pays d\'Aix"},
-      {img:I_SDB_TURQUOISE,   label:"Carrelage hexagonal turquoise",   loc:"Région PACA"},
-      {img:I_SDB_BEIGE,       label:"Salle de bain moderne",           loc:"Région PACA"},
-    ]
-  },
-  chantiers: {
-    label: "Chantiers", icon: "🔨",
-    items: [
-      {img:I_VILLA_CHANTIER1, label:"Villa – enduit intérieur",        loc:"Pays d\'Aix"},
-      {img:I_VILLA_CHANTIER2, label:"Villa – peinture en cours",       loc:"Pays d\'Aix"},
-      {img:I_CHANTIER,        label:"Pose placo & plomberie",          loc:"Peynier"},
-      {img:I_SDB_PENDANT,     label:"Pose niches placo",               loc:"Région PACA"},
-      {img:I_PLACO_VOLETS,    label:"Chantier placo",                  loc:"Région PACA"},
-      {img:I_PLACO_ARCHES,    label:"Plâtrerie – arches",              loc:"Région PACA"},
-      {img:I_SALON_TV_CHANTIER,label:"Pose meuble TV placo",           loc:"Région PACA"},
-      {img:I_DEMOLITION,      label:"Gros œuvre – démolition",         loc:"Région PACA"},
-      {img:I_CHANTIER2,       label:"Gros œuvre – étais nuit",         loc:"Région PACA"},
-      {img:I_CHAMBRE_OVALE_AVANT, label:"Chambre ovale – avant ragréage", loc:"Région PACA"},
-      {img:I_CHAMBRE_RAGREAGE,   label:"Chambre ovale – ragréage",       loc:"Région PACA"},
     ]
   },
   trompeloeil: {
@@ -409,8 +437,8 @@ function HeroTitle() {
   const [charIdx, setCharIdx] = useState(0);
   const [done, setDone] = useState(false);
 
-  const delays = [0, 1400, 2600]; // délais entre chaque mot
-  const speeds = [110, 150, 95];  // vitesse frappe par mot
+  const delays = [0, 2000, 3800]; // délais entre chaque mot
+  const speeds = [160, 200, 140]; // vitesse frappe par mot
 
   useEffect(() => {
     if (done) return;
@@ -419,7 +447,7 @@ function HeroTitle() {
       return () => clearTimeout(t);
     }
     if (step < words.length - 1) {
-      const t = setTimeout(() => { setStep(s => s+1); setCharIdx(0); }, delays[step+1] - delays[step] + 400);
+      const t = setTimeout(() => { setStep(s => s+1); setCharIdx(0); }, delays[step+1] - delays[step] + 700);
       return () => clearTimeout(t);
     }
     setDone(true);
@@ -449,13 +477,28 @@ function HeroTitle() {
 
 export default function Site() {
   const [mob, setMob]     = useState(false);
-  const [cat, setCat]     = useState("renovation");
+  const [cat, setCat]     = useState("sdb");
   const [lbSrc, setLbSrc] = useState(null);
   const [lbIdx, setLbIdx] = useState(null);
   const [sent, setSent]   = useState(false);
   const [sending, setSending] = useState(false);
 
   const scroll = id => { document.getElementById(id)?.scrollIntoView({behavior:"smooth"}); setMob(false); };
+  const [showTop, setShowTop] = useState(false);
+
+  useEffect(() => {
+    // Back to top
+    const onScroll = () => setShowTop(window.scrollY > 400);
+    window.addEventListener("scroll", onScroll);
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add("visible"); });
+    }, {threshold: 0.12});
+    document.querySelectorAll(".reveal,.reveal-left,.reveal-right").forEach(el => observer.observe(el));
+
+    return () => { window.removeEventListener("scroll", onScroll); observer.disconnect(); };
+  }, []);
   const sub = e => { e.preventDefault(); setSending(true); setTimeout(()=>{setSending(false);setSent(true);},1200); };
   const openLb = (src, i) => { setLbSrc(src); setLbIdx(i); };
   const closeLb = () => { setLbSrc(null); setLbIdx(null); };
@@ -478,7 +521,7 @@ export default function Site() {
           {[["accueil","Accueil"],["galerie","Réalisations"],["services","Services"],["experience","Expérience"]].map(([id,l])=>(
             <button key={id} onClick={()=>scroll(id)}>{l}</button>
           ))}
-          <a href="https://nuancier-peinture.vercel.app/" target="_blank" rel="noreferrer">Simulateur</a>
+          <button onClick={()=>scroll("simulateur")}>Simulateur</button>
           <button className="nav-cta" onClick={()=>scroll("contact")}>Devis Gratuit</button>
         </div>
         <button className="burger" onClick={()=>setMob(!mob)}>
@@ -491,7 +534,7 @@ export default function Site() {
         {[["accueil","🏠 Accueil"],["galerie","🎨 Réalisations"],["services","🔧 Services"],["experience","⭐ Expérience"]].map(([id,l])=>(
           <button key={id} onClick={()=>scroll(id)}>{l}</button>
         ))}
-        <a href="https://nuancier-peinture.vercel.app/" target="_blank" rel="noreferrer" onClick={()=>setMob(false)}>🎯 Simulateur</a>
+        <button onClick={()=>scroll("simulateur")}>🎯 Simulateur</button>
         <button className="mob-cta" onClick={()=>scroll("contact")}>Devis Gratuit →</button>
       </div>
 
@@ -530,7 +573,7 @@ export default function Site() {
       </div>
 
       {/* GALERIE */}
-      <div id="galerie" className="sec">
+      <div id="galerie" className="sec reveal">
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"3rem",marginBottom:36,paddingBottom:22,borderBottom:"1px solid #DEDEDE",alignItems:"end"}}>
           <div>
             <div className="sec-label">01 — Notre travail</div>
@@ -552,6 +595,15 @@ export default function Site() {
             </button>
           ))}
         </div>
+        {catFeatured[cat] && (
+          <div className="cat-featured" onClick={()=>openLb(cat,0)}>
+            <img src={catFeatured[cat].img} alt={catFeatured[cat].label}/>
+            <div className="cat-featured-label">
+              {catFeatured[cat].label}
+              <div className="cat-featured-sub">{catFeatured[cat].sub}</div>
+            </div>
+          </div>
+        )}
         <div className={cat==="art" ? "gal-grid-4" : "gal-grid-3"}>
           {galCats[cat].items.map((g,i)=>(
             <div key={i} className="gc" onClick={()=>openLb(cat,i)}>
@@ -572,7 +624,7 @@ export default function Site() {
       )}
 
       {/* SIMULATEUR */}
-      <div className="sim">
+      <div className="sim reveal" id="simulateur">
         <div>
           <div style={{fontSize:10,letterSpacing:".22em",textTransform:"uppercase",color:"rgba(255,255,255,.28)",marginBottom:12}}>Outil gratuit</div>
           <div style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:"clamp(1.8rem,3.5vw,3.2rem)",fontWeight:700,color:"#fff",lineHeight:1.05,marginBottom:10}}>
@@ -589,7 +641,7 @@ export default function Site() {
       </div>
 
       {/* SERVICES */}
-      <div id="services" className="sec">
+      <div id="services" className="sec reveal">
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-end",marginBottom:30,paddingBottom:18,borderBottom:"1px solid #DEDEDE"}}>
           <div>
             <div className="sec-label">02 — Nos Services</div>
@@ -615,7 +667,7 @@ export default function Site() {
       </div>
 
       {/* EXPÉRIENCE */}
-      <div id="experience" className="exp-grid">
+      <div id="experience" className="exp-grid reveal">
         <div className="exp-l">
           <div className="sec-label">03 — Expérience</div>
           <div className="sec-title" style={{fontSize:"clamp(2.5rem,4.5vw,4.5rem)"}}>Expérience</div>
@@ -640,7 +692,7 @@ export default function Site() {
       </div>
 
       {/* CONTACT */}
-      <div id="contact" className="ct-grid">
+      <div id="contact" className="ct-grid reveal">
         <div className="ct-l">
           <div className="sec-label">04 — Nous contacter</div>
           <div className="sec-title" style={{fontSize:"clamp(2.5rem,4.5vw,4.5rem)"}}>Nous<br/><em>contacter</em></div>
@@ -723,6 +775,9 @@ export default function Site() {
           ))}
         </div>
       </footer>
+
+      {/* BACK TO TOP */}
+      <button className={`back-top${showTop?" show":""}`} onClick={()=>window.scrollTo({top:0,behavior:"smooth"})} aria-label="Retour en haut">↑</button>
     </div>
   );
 }
