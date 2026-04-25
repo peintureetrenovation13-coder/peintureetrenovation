@@ -99,7 +99,7 @@ body{font-family:Inter,sans-serif;background:#FAF7F2;color:#1A1A1A;overflow-x:hi
 .hero-tag::before{content:"—";color:#C8973A;}
 .hero-divider{width:60px;height:1px;background:#C8973A;margin:16px 0;animation:lineGrow 1.8s ease 3s both;}
 .hero-logos{display:flex;align-items:center;gap:16px;margin-bottom:26px;animation:sweepFromBottom 1.3s ease 3.4s both;padding:12px 0;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);}
-.mda-wrap{background:#fff;padding:5px 10px;border-radius:2px;display:inline-flex;align-items:center;}
+.mda-wrap{background:transparent;padding:5px 4px;border-radius:2px;display:inline-flex;align-items:center;}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap;animation:sweepFromBottom 1.3s ease 3.8s both;}
 .btn-gold{background:#C8973A;color:#fff;padding:11px 26px;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid #C8973A;cursor:pointer;font-family:Inter;transition:.2s;display:inline-block;text-decoration:none;}
 .btn-gold:hover{background:transparent;color:#C8973A;}
@@ -226,10 +226,10 @@ body{font-family:Inter,sans-serif;background:#FAF7F2;color:#1A1A1A;overflow-x:hi
 @keyframes lineGrow{from{width:0}to{width:60px}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 /* Traversée pleine page */
-@keyframes sweepFromLeft{from{opacity:0;transform:translateX(-100vw)}to{opacity:1;transform:translateX(0)}}
-@keyframes sweepFromRight{from{opacity:0;transform:translateX(100vw)}to{opacity:1;transform:translateX(0)}}
-@keyframes sweepFromBottom{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:translateY(0)}}
-@keyframes sweepFromTop{from{opacity:0;transform:translateY(-60px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sweepFromLeft{from{opacity:0;transform:translateX(-48px) skewX(-2deg)}to{opacity:1;transform:translateX(0) skewX(0)}}
+@keyframes sweepFromRight{from{opacity:0;transform:translateX(48px) skewX(2deg)}to{opacity:1;transform:translateX(0) skewX(0)}}
+@keyframes sweepFromBottom{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sweepFromTop{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
 .hero-cursor{display:inline-block;width:3px;height:.85em;background:#C8973A;margin-left:2px;animation:blink 1s step-end infinite;vertical-align:text-bottom;}
 @media(max-width:768px){
   .nav{height:58px;padding:0 4%;}.nav-links{display:none;}.burger{display:flex;}.mob-menu{top:58px;}
@@ -511,7 +511,7 @@ export default function Site() {
       {/* NAV */}
       <nav className="nav">
         <div className="nav-logo" onClick={()=>scroll("accueil")}>
-          <img src={I_LOGO} alt="logo" style={{height:48,objectFit:"contain"}}/>
+          <img src={I_LOGO} alt="logo" style={{height:48,width:48,objectFit:"cover",borderRadius:"50%",flexShrink:0}}/>
           <div style={{lineHeight:1.1}}>
             <div style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:"1.25rem",fontWeight:700,color:"#fff"}}>Peinture &amp; Rénovation</div>
             <div style={{fontFamily:"'Dancing Script',cursive",fontSize:".78rem",color:"#C8973A"}}>Axel Sandahl</div>
@@ -552,10 +552,10 @@ export default function Site() {
           </div>
           <div className="hero-divider"/>
           <div className="hero-logos">
-            <img src={I_LOGO} alt="logo" style={{height:60,objectFit:"contain"}}/>
+            <img src={I_LOGO} alt="logo" style={{height:60,width:60,objectFit:"cover",borderRadius:"50%",flexShrink:0}}/>
             <div style={{width:1,height:50,background:"rgba(255,255,255,.15)"}}/>
             <div className="mda-wrap">
-              <img src={I_MDA} alt="Métiers d\'Art PACA" style={{height:44,objectFit:"contain"}}/>
+              <img src={I_MDA} alt="Métiers d\'Art PACA" style={{height:64,objectFit:"contain",mixBlendMode:"multiply"}}/>
             </div>
           </div>
           <div className="hero-btns">
@@ -762,7 +762,7 @@ export default function Site() {
       {/* FOOTER */}
       <footer className="footer">
         <div style={{display:"flex",alignItems:"center",gap:14}}>
-          <img src={I_LOGO} alt="logo" style={{height:50,objectFit:"contain"}}/>
+          <img src={I_LOGO} alt="logo" style={{height:50,width:50,objectFit:"cover",borderRadius:"50%",flexShrink:0}}/>
           <div>
             <div style={{fontFamily:"'Cormorant Garamond',serif",fontStyle:"italic",fontSize:"1.1rem",fontWeight:700,color:"#0A0A0A"}}>Peinture &amp; Rénovation</div>
             <div style={{fontFamily:"'Dancing Script',cursive",fontSize:".9rem",color:"#C8973A"}}>Axel Sandahl · Peynier, Aix-en-Provence</div>
