@@ -1,0 +1,9 @@
+
+=== mda-wrap ===
+'255,255,.1);}\n.mda-wrap{background:transparent;padding:5px 4px;border-radius:2px;display:inline-flex;align-items:ce'
+
+=== sweepFromLeft ===
+':8px;animation:sweepFromLeft 2s cubic-bezier(.16,1,.3,1) .3s both;}\n.hero-title em{color:#C8973A;}\n.hero-sub{font-f'
+
+=== objectFit ===
+'ht:48,width:48,objectFit:"cover",borderRadius:"50%",flexShrink:0}}/>\n          <div style={{lineHeight:1.1}}>\n     '
