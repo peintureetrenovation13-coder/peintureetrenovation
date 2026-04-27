@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 import I_LOGO from "/logo.jpeg";
 import I_MDA from "/mda.png";
@@ -430,7 +431,75 @@ function LightBox({imgs, idx, onClose, onPrev, onNext}) {
   );
 }
 
-// ─── Composant animation titre hero ───
+// ─── Comet orbit ───
+function Comet({ rx, ry, duration, delay = 0, size = 5 }) {
+  const n = 60;
+  const xs = Array.from({ length: n + 1 }, (_, i) => rx * Math.cos((i / n) * 2 * Math.PI));
+  const ys = Array.from({ length: n + 1 }, (_, i) => ry * Math.sin((i / n) * 2 * Math.PI));
+  return (
+    <motion.div
+      style={{
+        position: "absolute",
+        width: size,
+        height: size,
+        borderRadius: "50%",
+        background: "#C8973A",
+        boxShadow: `0 0 ${size * 3}px 2px rgba(200,151,58,0.7)`,
+        top: 0, left: 0,
+        marginLeft: -size / 2,
+        marginTop: -size / 2,
+      }}
+      animate={{ x: xs, y: ys }}
+      transition={{ duration, repeat: Infinity, ease: "linear", delay }}
+    />
+  );
+}
+
+// ─── Composant animation titre hero (comètes + apparition) ───
+function HeroTitle() {
+  const [phase, setPhase] = useState(0);
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setPhase(1), 300);
+    const t2 = setTimeout(() => setPhase(2), 5500);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);
+
+  return (
+    <div style={{ animation: "none", position: "relative" }}>
+      <motion.div
+        animate={{ opacity: phase >= 2 ? 1 : 0 }}
+        initial={{ opacity: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="hero-title" style={{ animation: "none" }}>
+          Peinture<br/><em>&amp;</em><br/>Rénovation
+        </div>
+        <div className="hero-sub" style={{ marginTop: 8 }}>Axel Sandahl</div>
+      </motion.div>
+
+      <AnimatePresence>
+        {phase === 1 && (
+          <motion.div
+            key="comets"
+            style={{ position: "absolute", inset: 0, pointerEvents: "none" }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div style={{ position: "absolute", top: "42%", left: "50%" }}>
+              <Comet rx={150} ry={88}  duration={1.8} delay={0}   size={6} />
+              <Comet rx={180} ry={108} duration={2.5} delay={0.7} size={4} />
+              <Comet rx={130} ry={70}  duration={1.3} delay={0.2} size={5} />
+              <Comet rx={165} ry={98}  duration={2.1} delay={1.4} size={3} />
+              <Comet rx={200} ry={118} duration={2.9} delay={0.5} size={3} />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 function HeroTitle() {
   const words = ["Peinture", "&", "Rénovation"];
   const [step, setStep] = useState(0);
