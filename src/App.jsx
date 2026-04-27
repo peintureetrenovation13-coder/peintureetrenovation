@@ -501,3 +501,5 @@ function HeroTitle() {
 }
 
 
+export default Site;
+
