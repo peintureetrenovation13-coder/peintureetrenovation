@@ -8,7 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
     "framer-motion": "^11.0.0",
+=======
+    "framer-motion": "^12.38.0",
+>>>>>>> claude/install-framer-motion-BQnWI
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
