@@ -551,7 +551,7 @@ export default function Site() {
         <div className="hero-l">
           <div className="hero-eyebrow">Artisan d\'Art · Aix-en-Provence</div>
           <HeroTitle/>
-          <div className="hero-sub">Axel Sandahl</div>
+          
           <div className="hero-location">Peynier — Pays d\'Aix-en-Provence (13)</div>
           <div className="hero-tags">
             {["Rénovation Immobilière","Travaux Artistiques","Artisan d\'Art"].map(t=>(
