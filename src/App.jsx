@@ -232,6 +232,23 @@ body{font-family:Inter,sans-serif;background:#FAF7F2;color:#1A1A1A;overflow-x:hi
 @keyframes sweepFromBottom{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
 @keyframes sweepFromTop{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
 .hero-cursor{display:inline-block;width:3px;height:.85em;background:#C8973A;margin-left:2px;animation:blink 1s step-end infinite;vertical-align:text-bottom;}
+/* AVIS GOOGLE */
+.avis-sec{padding:5rem 5%;border-top:1px solid #DEDEDE;background:#FAFAFA;}
+.avis-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:36px;gap:20px;flex-wrap:wrap;}
+.avis-score-wrap{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.avis-score-num{font-family:"Cormorant Garamond",serif;font-size:3.5rem;font-weight:700;color:#0A0A0A;line-height:1;}
+.avis-stars{color:#F9A825;font-size:20px;letter-spacing:2px;margin:4px 0;}
+.avis-count{font-size:10px;color:#888;letter-spacing:.15em;text-transform:uppercase;}
+.avis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.avis-card{background:#fff;border:1px solid #DEDEDE;padding:24px 22px;display:flex;flex-direction:column;gap:12px;transition:border-color .25s,box-shadow .25s;}
+.avis-card:hover{border-color:#C8973A;box-shadow:0 4px 20px rgba(0,0,0,.06);}
+.avis-card-top{display:flex;align-items:center;gap:12px;}
+.avis-avatar{width:40px;height:40px;border-radius:50%;background:#0A0A0A;color:#C8973A;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:"Cormorant Garamond",serif;}
+.avis-name{font-size:13px;font-weight:500;color:#1A1A1A;}
+.avis-date{font-size:10px;color:#aaa;letter-spacing:.05em;}
+.avis-card-stars{color:#F9A825;font-size:14px;letter-spacing:1px;}
+.avis-text{font-size:12px;font-weight:300;color:#555;line-height:1.85;font-style:italic;flex:1;}
+.avis-google-badge{display:flex;align-items:center;gap:6px;font-size:10px;color:#888;letter-spacing:.08em;margin-top:4px;}
 @media(max-width:768px){
   .nav{height:58px;padding:0 4%;}.nav-links{display:none;}.burger{display:flex;}.mob-menu{top:58px;}
   .hero{grid-template-columns:1fr;min-height:auto;}.hero-l{padding:2.5rem 5% 2rem;border-right:none;}.hero-r{height:240px;}.hero-title{font-size:3.2rem;}
@@ -245,6 +262,8 @@ body{font-family:Inter,sans-serif;background:#FAF7F2;color:#1A1A1A;overflow-x:hi
   .exp-l,.ct-l{padding:3rem 5%;border-right:none;border-bottom:1px solid #DEDEDE;}.exp-r,.ct-r{padding:3rem 5%;}
   .cf-row{grid-template-columns:1fr;}.sec{padding:3rem 5%;}.footer{flex-direction:column;text-align:center;}
   .gal-menu-btn{padding:12px 14px;font-size:10px;}
+  .avis-grid{grid-template-columns:1fr;}
+  .avis-sec{padding:3rem 5%;}
 }
 @media(min-width:768px) and (max-width:1024px){
   .gal-grid-3{grid-template-columns:repeat(2,1fr);}
@@ -483,6 +502,15 @@ function HeroTitle() {
 }
 
 
+const avis = [
+  { name:"Virginie M.", date:"il y a un mois", stars:5, text:"Axel est très sérieux et professionnel, son travail est minutieux, il m'a laissé une maison impeccable !! Je le recommande fortement." },
+  { name:"Camille C.", date:"il y a un mois", stars:5, text:"Efficaces et très content du résultat." },
+  { name:"Debayle W.", date:"il y a 3 mois", stars:5, text:"Axel a réalisé la rénovation de ma maison. Grâce à son savoir faire et sa capacité à se projeter, il a réussi à optimiser au mieux l'agencement ce qui a agrandi considérablement l'espace à vivre. De plus il est très méticuleux dans les finitions." },
+  { name:"Laure B.", date:"il y a 3 mois", stars:5, text:"Je recommande chaleureusement cet artisan. Peinture et Rénovation a réalisé une rénovation totale de mon appartement (carrelage, placo, peinture, électricité et plomberie) et je suis vraiment ravie." },
+  { name:"Cecile M.", date:"il y a 3 mois", stars:5, text:"Axel a refait toute notre maison en France. Il utilise uniquement des produits professionnels, travaille avec le souci du détail ce qui est rare dans la profession. Nous recommandons cette sérieuse entreprise." },
+  { name:"Anne-Claire C.", date:"il y a 3 mois", stars:5, text:"Excellent artisan très méticuleux, ponctuel et sympathique. Je suis enchantée par sa prestation !" },
+];
+
 export default function Site() {
   const [mob, setMob]     = useState(false);
   const [cat, setCat]     = useState("sdb");
@@ -699,10 +727,47 @@ export default function Site() {
         </div>
       </div>
 
+      {/* AVIS GOOGLE */}
+      <div className="avis-sec reveal">
+        <div className="avis-header">
+          <div>
+            <div className="sec-label">04 — Avis clients</div>
+            <div className="sec-title">Ce que disent <em>nos clients</em></div>
+          </div>
+          <div className="avis-score-wrap">
+            <div>
+              <div className="avis-score-num">5,0</div>
+              <div className="avis-stars">★★★★★</div>
+              <div className="avis-count">Sur Google · 7 avis</div>
+            </div>
+            <a href="https://maps.google.com/?cid=7305104450838024468" target="_blank" rel="noreferrer" className="btn-black" style={{fontSize:10,padding:"9px 18px",textDecoration:"none",display:"inline-block",whiteSpace:"nowrap"}}>Voir sur Google →</a>
+          </div>
+        </div>
+        <div className="avis-grid">
+          {avis.map((a,i)=>(
+            <div key={i} className="avis-card">
+              <div className="avis-card-top">
+                <div className="avis-avatar">{a.name[0]}</div>
+                <div>
+                  <div className="avis-name">{a.name}</div>
+                  <div className="avis-date">{a.date}</div>
+                </div>
+              </div>
+              <div className="avis-card-stars">{"★".repeat(a.stars)}</div>
+              <p className="avis-text">"{a.text}"</p>
+              <div className="avis-google-badge">
+                <svg width="13" height="13" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+                Avis Google vérifié
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* CONTACT */}
       <div id="contact" className="ct-grid reveal">
         <div className="ct-l">
-          <div className="sec-label">04 — Nous contacter</div>
+          <div className="sec-label">05 — Nous contacter</div>
           <div className="sec-title" style={{fontSize:"clamp(2.5rem,4.5vw,4.5rem)"}}>Nous<br/><em>contacter</em></div>
           <p className="body-text" style={{marginTop:14}}>Situés à Peynier, à proximité d\'Aix en Provence. Si vous souhaitez un devis gratuit ou obtenir des informations, n\'hésitez pas à nous contacter.</p>
           <div style={{marginTop:26,display:"flex",flexDirection:"column",gap:18}}>
