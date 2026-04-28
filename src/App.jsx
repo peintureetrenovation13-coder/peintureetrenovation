@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import I_LOGO from "/logo.jpeg";
@@ -211,9 +211,29 @@ body{font-family:Inter,sans-serif;background:#FAF7F2;color:#1A1A1A;overflow-x:hi
 .reveal-right{opacity:0;transform:translateX(50px);transition:opacity .9s ease,transform .9s ease;}
 .reveal-right.visible{opacity:1;transform:translateX(0);}
 /* Back to top */
-.back-top{position:fixed;bottom:28px;right:28px;z-index:150;width:44px;height:44px;background:#0A0A0A;color:#C8973A;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:all .3s;opacity:0;pointer-events:none;}
+.back-top{position:fixed;bottom:28px;right:96px;z-index:150;width:44px;height:44px;background:#0A0A0A;color:#C8973A;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:all .3s;opacity:0;pointer-events:none;}
 .back-top.show{opacity:1;pointer-events:auto;}
 .back-top:hover{background:#C8973A;color:#fff;transform:translateY(-3px);}
+.chat-btn{position:fixed;bottom:28px;right:28px;z-index:1000;width:56px;height:56px;border-radius:50%;background:#C8973A;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(200,151,58,.45);transition:.25s;}
+.chat-btn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(200,151,58,.65);}
+.chat-win{position:fixed;bottom:96px;right:28px;z-index:1000;width:340px;background:#fff;border:1px solid #DEDEDE;box-shadow:0 8px 40px rgba(0,0,0,.18);display:flex;flex-direction:column;font-family:Inter,sans-serif;border-radius:2px;overflow:hidden;}
+.chat-head{background:#0A0A0A;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.chat-body{overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:160px;max-height:320px;}
+.chat-msg-bot{background:#F5F5F5;color:#1A1A1A;padding:10px 13px;font-size:13px;line-height:1.55;max-width:85%;border-radius:0 8px 8px 8px;word-break:break-word;}
+.chat-msg-user{background:#C8973A;color:#fff;padding:10px 13px;font-size:13px;line-height:1.55;max-width:85%;border-radius:8px 0 8px 8px;align-self:flex-end;word-break:break-word;}
+.chat-foot{padding:10px 12px;border-top:1px solid #DEDEDE;display:flex;gap:8px;flex-shrink:0;}
+.chat-inp{flex:1;border:1px solid #DEDEDE;padding:9px 12px;font-family:Inter;font-size:13px;color:#1A1A1A;outline:none;border-radius:2px;}
+.chat-inp:focus{border-color:#C8973A;}
+.chat-send{background:#C8973A;color:#fff;border:none;padding:9px 14px;cursor:pointer;font-family:Inter;font-size:14px;border-radius:2px;transition:.2s;flex-shrink:0;}
+.chat-send:hover{background:#b08432;}
+.chat-send:disabled{opacity:.4;cursor:not-allowed;}
+.chat-cform{background:#F9F6EF;border:1px solid rgba(200,151,58,.3);padding:12px;display:flex;flex-direction:column;gap:7px;}
+.chat-cform input{border:1px solid #DEDEDE;padding:8px 10px;font-family:Inter;font-size:12px;outline:none;border-radius:2px;width:100%;}
+.chat-cform input:focus{border-color:#C8973A;}
+.chat-cform-btn{background:#0A0A0A;color:#fff;border:none;padding:9px;font-family:Inter;font-size:10px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:.2s;}
+.chat-cform-btn:hover{background:#C8973A;}
+.chat-coords-btn{align-self:flex-start;background:none;border:1px solid #C8973A;color:#C8973A;padding:6px 12px;font-size:11px;font-family:Inter;cursor:pointer;border-radius:2px;letter-spacing:.06em;transition:.2s;}
+.chat-coords-btn:hover{background:#C8973A;color:#fff;}
 /* Featured photo */
 .cat-featured{width:100%;height:240px;overflow:hidden;border-radius:2px;margin-top:16px;margin-bottom:8px;position:relative;cursor:pointer;}
 .cat-featured img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.25,.46,.45,.94);}
@@ -514,6 +534,101 @@ const avis = [
   { name:"Cecile M.", date:"il y a 3 mois", stars:5, text:"Axel a refait toute notre maison en France. Il utilise uniquement des produits professionnels, travaille avec le souci du détail ce qui est rare dans la profession. Nous recommandons cette sérieuse entreprise." },
   { name:"Anne-Claire C.", date:"il y a 3 mois", stars:5, text:"Excellent artisan très méticuleux, ponctuel et sympathique. Je suis enchantée par sa prestation !" },
 ];
+
+function FloatingChat() {
+  const [open, setOpen] = useState(false);
+  const [msgs, setMsgs] = useState([
+    { role:"assistant", content:"Bonjour ! Je suis l'assistant de Peinture & Rénovation. Comment puis-je vous aider ?" }
+  ]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showCForm, setShowCForm] = useState(false);
+  const [contact, setContact] = useState({ name:"", phone:"", email:"" });
+  const [contactSent, setContactSent] = useState(false);
+  const endRef = useRef(null);
+
+  useEffect(() => { endRef.current?.scrollIntoView({ behavior:"smooth" }); }, [msgs, showCForm]);
+
+  const sendMsg = async () => {
+    if (!input.trim() || loading) return;
+    const next = [...msgs, { role:"user", content:input.trim() }];
+    setMsgs(next); setInput(""); setLoading(true);
+    try {
+      const r = await fetch("/api/chat", {
+        method:"POST", headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify({ messages: next.slice(1) })
+      });
+      const d = await r.json();
+      setMsgs(p => [...p, { role:"assistant", content: d.content || "Désolé, je ne peux pas répondre. Appelez-nous au 06 16 70 57 57." }]);
+    } catch {
+      setMsgs(p => [...p, { role:"assistant", content:"Désolé, une erreur s'est produite. Appelez-nous au 06 16 70 57 57." }]);
+    }
+    setLoading(false);
+  };
+
+  const sendContact = async () => {
+    if (!contact.name.trim() || (!contact.phone.trim() && !contact.email.trim())) return;
+    const conv = msgs.slice(-8).map(m=>`${m.role==="user"?"Client":"Assistant"}: ${m.content}`).join("\n");
+    try {
+      await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method:"POST", headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify({
+          service_id: "YOUR_SERVICE_ID",
+          template_id: "YOUR_TEMPLATE_ID",
+          user_id: "YOUR_PUBLIC_KEY",
+          template_params: { nom: contact.name, telephone: contact.phone||"—", email_client: contact.email||"—", conversation: conv }
+        })
+      });
+    } catch {}
+    setContactSent(true); setShowCForm(false);
+    setMsgs(p => [...p, { role:"assistant", content:`Merci ${contact.name.split(" ")[0]} ! Nous avons bien reçu vos coordonnées et vous rappellerons très rapidement.` }]);
+  };
+
+  return (
+    <>
+      {open && (
+        <div className="chat-win">
+          <div className="chat-head">
+            <div>
+              <div style={{fontSize:12,fontWeight:500,color:"#C8973A",letterSpacing:".06em"}}>Assistant Peinture &amp; Rénovation</div>
+              <div style={{fontSize:10,color:"rgba(255,255,255,.4)",marginTop:2}}>Répond en quelques secondes</div>
+            </div>
+            <button onClick={()=>setOpen(false)} style={{background:"none",border:"none",color:"rgba(255,255,255,.5)",fontSize:18,cursor:"pointer",lineHeight:1,padding:"2px 4px"}}>✕</button>
+          </div>
+          <div className="chat-body">
+            {msgs.map((m,i) => (
+              <div key={i} className={m.role==="assistant"?"chat-msg-bot":"chat-msg-user"}>{m.content}</div>
+            ))}
+            {loading && <div className="chat-msg-bot" style={{color:"#aaa",fontStyle:"italic",fontSize:12}}>…</div>}
+            {!contactSent && !showCForm && msgs.length >= 3 && (
+              <button className="chat-coords-btn" onClick={()=>setShowCForm(true)}>Laisser mes coordonnées →</button>
+            )}
+            {showCForm && (
+              <div className="chat-cform">
+                <div style={{fontSize:11,color:"#555",fontWeight:500}}>Vos coordonnées pour être rappelé(e) :</div>
+                <input placeholder="Prénom et nom *" value={contact.name} onChange={e=>setContact({...contact,name:e.target.value})}/>
+                <input placeholder="Téléphone (06…)" value={contact.phone} onChange={e=>setContact({...contact,phone:e.target.value})}/>
+                <input placeholder="Email (optionnel)" value={contact.email} onChange={e=>setContact({...contact,email:e.target.value})}/>
+                <button className="chat-cform-btn" onClick={sendContact}>Envoyer →</button>
+              </div>
+            )}
+            <div ref={endRef}/>
+          </div>
+          <div className="chat-foot">
+            <input className="chat-inp" value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&!e.shiftKey&&sendMsg()} placeholder="Votre question…" maxLength={500}/>
+            <button className="chat-send" onClick={sendMsg} disabled={loading||!input.trim()}>→</button>
+          </div>
+        </div>
+      )}
+      <button className="chat-btn" onClick={()=>setOpen(o=>!o)} aria-label="Assistant chat">
+        {open
+          ? <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4l12 12M16 4L4 16" stroke="#fff" strokeWidth="2" strokeLinecap="round"/></svg>
+          : <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" fill="white"/></svg>
+        }
+      </button>
+    </>
+  );
+}
 
 export default function Site() {
   const [mob, setMob]     = useState(false);
@@ -857,6 +972,9 @@ export default function Site() {
 
       {/* BACK TO TOP */}
       <button className={`back-top${showTop?" show":""}`} onClick={()=>window.scrollTo({top:0,behavior:"smooth"})} aria-label="Retour en haut">↑</button>
+
+      {/* CHATBOT */}
+      <FloatingChat/>
     </div>
   );
 }
