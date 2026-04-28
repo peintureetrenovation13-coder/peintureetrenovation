@@ -535,53 +535,94 @@ const avis = [
   { name:"Anne-Claire C.", date:"il y a 3 mois", stars:5, text:"Excellent artisan très méticuleux, ponctuel et sympathique. Je suis enchantée par sa prestation !" },
 ];
 
+const CHAT_RULES = [
+  { keys:["bonjour","bonsoir","salut","coucou","hello","bjr"],
+    reply:"Bonjour ! Bienvenue chez Peinture & Rénovation. Je suis là pour vous renseigner sur nos services, délais et tarifs. Comment puis-je vous aider ?" },
+  { keys:["peinture","peindre","peintre","intérieur","extérieur","façade","ravalement"],
+    reply:"Nous réalisons tous travaux de peinture : intérieure, extérieure, ravalement de façade, préparation des supports et finitions haut de gamme. Souhaitez-vous un devis ?" },
+  { keys:["plâtrerie","placo","cloison","faux plafond","enduit","lissage","ragréage"],
+    reply:"Nous intervenons en plâtrerie : cloisons, faux plafonds, enduits de lissage, ragréage et rebouchage. Décrivez-nous votre projet !" },
+  { keys:["plomberie","plombier","douche","baignoire","robinet","tuyau"],
+    reply:"Nous prenons en charge la plomberie dans le cadre de rénovations complètes. Selon l'ampleur du projet, nous mobilisons aussi notre collectif d'artisans." },
+  { keys:["revêtement","carrelage","parquet","faïence","vinyl","sol","dallage"],
+    reply:"Nous posons tous revêtements sol et murs : parquet, carrelage, faïence, vinyl — avec préparation et finitions soignées." },
+  { keys:["fresque","murale","peinture murale"],
+    reply:"Nous créons des fresques murales sur mesure, alliant art et technique. Chaque réalisation est unique et personnalisée selon vos envies." },
+  { keys:["trompe","trompe l'œil","trompe l'oeil","décor peint"],
+    reply:"Nous réalisons des trompe l'œil architecturaux et décoratifs : volumes, volets peints, perspectives — un savoir-faire artistique rare." },
+  { keys:["stucco","tadelakt","béton ciré","effet matière","artistique","décoration"],
+    reply:"Nos travaux artistiques incluent stucco, tadelakt, effets matière et décoration sur mesure. Dites-nous ce que vous imaginez !" },
+  { keys:["devis","prix","tarif","budget","coût","estimation","combien","cher"],
+    reply:"Pour estimer votre projet, notre simulateur gratuit est disponible sur cette page. Pour un devis personnalisé, laissez vos coordonnées ou appelez le 06 16 70 57 57.",
+    cta:true },
+  { keys:["disponible","disponibilité","délai","quand","urgent","rapidement"],
+    reply:"Pour connaître nos disponibilités, appelez le 06 16 70 57 57. Nous répondons sous 48h et intervenons sur Peynier, Aix-en-Provence et tout le Pays d'Aix.",
+    cta:true },
+  { keys:["maçonnerie","maçon","électricité","électricien","menuiserie","menuisier","charpente","isolation","toiture"],
+    reply:"Nous travaillons avec un collectif d'artisans qualifiés : maçons, électriciens, menuisiers et bien d'autres. Nous pouvons coordonner votre projet de A à Z !" },
+  { keys:["zone","secteur","peynier","aix","gardanne","meyreuil","fuveau","trets","aubagne","marseille"],
+    reply:"Nous intervenons sur Peynier, Aix-en-Provence, Gardanne, Meyreuil, Fuveau, Trets, Rousset et Aubagne." },
+  { keys:["contact","appeler","rappel","rappeler","coordonnées","rdv","rendez-vous","intéressé"],
+    reply:"Laissez vos coordonnées ci-dessous et nous vous rappellerons dans les meilleurs délais !",
+    cta:true },
+  { keys:["merci","parfait","super","excellent","top","nickel","d'accord","ok"],
+    reply:"Merci ! N'hésitez pas si vous avez d'autres questions. Nous sommes disponibles du lundi au samedi." },
+];
+
+function matchRule(text) {
+  const t = text.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+  for (const r of CHAT_RULES) {
+    if (r.keys.some(k => t.includes(k.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")))) return r;
+  }
+  return null;
+}
+
 function FloatingChat() {
-  const [open, setOpen] = useState(false);
-  const [msgs, setMsgs] = useState([
-    { role:"assistant", content:"Bonjour ! Je suis l'assistant de Peinture & Rénovation. Comment puis-je vous aider ?" }
-  ]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [showCForm, setShowCForm] = useState(false);
-  const [contact, setContact] = useState({ name:"", phone:"", email:"" });
+  const [open, setOpen]             = useState(false);
+  const [msgs, setMsgs]             = useState([{ from:"bot", text:"Bonjour ! Je suis l'assistant de Peinture & Rénovation. Comment puis-je vous aider ?" }]);
+  const [input, setInput]           = useState("");
+  const [typing, setTyping]         = useState(false);
+  const [showCForm, setShowCForm]   = useState(false);
+  const [pendingCTA, setPendingCTA] = useState(false);
+  const [contact, setContact]       = useState({ name:"", phone:"", email:"" });
   const [contactSent, setContactSent] = useState(false);
   const endRef = useRef(null);
 
-  useEffect(() => { endRef.current?.scrollIntoView({ behavior:"smooth" }); }, [msgs, showCForm]);
+  useEffect(() => { endRef.current?.scrollIntoView({ behavior:"smooth" }); }, [msgs, typing, showCForm]);
 
-  const sendMsg = async () => {
-    if (!input.trim() || loading) return;
-    const next = [...msgs, { role:"user", content:input.trim() }];
-    setMsgs(next); setInput(""); setLoading(true);
-    try {
-      const r = await fetch("/api/chat", {
-        method:"POST", headers:{ "Content-Type":"application/json" },
-        body: JSON.stringify({ messages: next.slice(1) })
-      });
-      const d = await r.json();
-      setMsgs(p => [...p, { role:"assistant", content: d.content || "Désolé, je ne peux pas répondre. Appelez-nous au 06 16 70 57 57." }]);
-    } catch {
-      setMsgs(p => [...p, { role:"assistant", content:"Désolé, une erreur s'est produite. Appelez-nous au 06 16 70 57 57." }]);
-    }
-    setLoading(false);
+  const botReply = (text, cta=false) => {
+    setTyping(true);
+    setTimeout(() => {
+      setMsgs(p => [...p, { from:"bot", text }]);
+      setTyping(false);
+      if (cta) setPendingCTA(true);
+    }, 700 + Math.random() * 400);
+  };
+
+  const sendMsg = () => {
+    const txt = input.trim();
+    if (!txt) return;
+    setMsgs(p => [...p, { from:"user", text:txt }]);
+    setInput("");
+    const rule = matchRule(txt);
+    if (rule) botReply(rule.reply, !!rule.cta);
+    else botReply("Je ne suis pas sûr de comprendre. Vous pouvez nous appeler au 06 16 70 57 57 ou utiliser le formulaire en bas de page.");
   };
 
   const sendContact = async () => {
     if (!contact.name.trim() || (!contact.phone.trim() && !contact.email.trim())) return;
-    const conv = msgs.slice(-8).map(m=>`${m.role==="user"?"Client":"Assistant"}: ${m.content}`).join("\n");
+    const conv = msgs.map(m=>`${m.from==="user"?"Client":"Assistant"}: ${m.text}`).join("\n");
     try {
       await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-        method:"POST", headers:{ "Content-Type":"application/json" },
+        method:"POST", headers:{"Content-Type":"application/json"},
         body: JSON.stringify({
-          service_id: "YOUR_SERVICE_ID",
-          template_id: "YOUR_TEMPLATE_ID",
-          user_id: "YOUR_PUBLIC_KEY",
-          template_params: { nom: contact.name, telephone: contact.phone||"—", email_client: contact.email||"—", conversation: conv }
+          service_id:"YOUR_SERVICE_ID", template_id:"YOUR_TEMPLATE_ID", user_id:"YOUR_PUBLIC_KEY",
+          template_params:{ nom:contact.name, telephone:contact.phone||"—", email_client:contact.email||"—", conversation:conv }
         })
       });
     } catch {}
-    setContactSent(true); setShowCForm(false);
-    setMsgs(p => [...p, { role:"assistant", content:`Merci ${contact.name.split(" ")[0]} ! Nous avons bien reçu vos coordonnées et vous rappellerons très rapidement.` }]);
+    setContactSent(true); setShowCForm(false); setPendingCTA(false);
+    botReply(`Merci ${contact.name.split(" ")[0]} ! Vos coordonnées ont bien été reçues, nous vous rappellerons très rapidement.`);
   };
 
   return (
@@ -589,25 +630,37 @@ function FloatingChat() {
       {open && (
         <div className="chat-win">
           <div className="chat-head">
-            <div>
-              <div style={{fontSize:12,fontWeight:500,color:"#C8973A",letterSpacing:".06em"}}>Assistant Peinture &amp; Rénovation</div>
-              <div style={{fontSize:10,color:"rgba(255,255,255,.4)",marginTop:2}}>Répond en quelques secondes</div>
+            <div style={{display:"flex",alignItems:"center",gap:10}}>
+              <div style={{width:36,height:36,borderRadius:"50%",background:"#C8973A",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" fill="white"/></svg>
+              </div>
+              <div>
+                <div style={{fontSize:12,fontWeight:500,color:"#fff",letterSpacing:".04em"}}>Assistant Peinture &amp; Rénovation</div>
+                <div style={{display:"flex",alignItems:"center",gap:5,marginTop:2}}>
+                  <div style={{width:6,height:6,borderRadius:"50%",background:"#4CAF50"}}/>
+                  <span style={{fontSize:10,color:"rgba(255,255,255,.5)"}}>En ligne</span>
+                </div>
+              </div>
             </div>
-            <button onClick={()=>setOpen(false)} style={{background:"none",border:"none",color:"rgba(255,255,255,.5)",fontSize:18,cursor:"pointer",lineHeight:1,padding:"2px 4px"}}>✕</button>
+            <button onClick={()=>setOpen(false)} style={{background:"none",border:"none",color:"rgba(255,255,255,.4)",fontSize:18,cursor:"pointer",padding:"2px 6px",lineHeight:1}}>✕</button>
           </div>
           <div className="chat-body">
             {msgs.map((m,i) => (
-              <div key={i} className={m.role==="assistant"?"chat-msg-bot":"chat-msg-user"}>{m.content}</div>
+              <div key={i} className={m.from==="bot"?"chat-msg-bot":"chat-msg-user"}>{m.text}</div>
             ))}
-            {loading && <div className="chat-msg-bot" style={{color:"#aaa",fontStyle:"italic",fontSize:12}}>…</div>}
-            {!contactSent && !showCForm && msgs.length >= 3 && (
-              <button className="chat-coords-btn" onClick={()=>setShowCForm(true)}>Laisser mes coordonnées →</button>
+            {typing && (
+              <div className="chat-msg-bot" style={{display:"flex",gap:5,alignItems:"center",padding:"12px 14px"}}>
+                {[0,.25,.5].map(d=><span key={d} style={{width:7,height:7,borderRadius:"50%",background:"#C8973A",display:"inline-block",animation:`pulse 1.1s ${d}s infinite`}}/>)}
+              </div>
+            )}
+            {pendingCTA && !showCForm && !contactSent && (
+              <button className="chat-coords-btn" onClick={()=>{setShowCForm(true);setPendingCTA(false);}}>Laisser mes coordonnées →</button>
             )}
             {showCForm && (
               <div className="chat-cform">
-                <div style={{fontSize:11,color:"#555",fontWeight:500}}>Vos coordonnées pour être rappelé(e) :</div>
+                <div style={{fontSize:11,color:"#555",fontWeight:500,marginBottom:2}}>Vos coordonnées pour être rappelé(e) :</div>
                 <input placeholder="Prénom et nom *" value={contact.name} onChange={e=>setContact({...contact,name:e.target.value})}/>
-                <input placeholder="Téléphone (06…)" value={contact.phone} onChange={e=>setContact({...contact,phone:e.target.value})}/>
+                <input placeholder="Téléphone (06…) *" value={contact.phone} onChange={e=>setContact({...contact,phone:e.target.value})}/>
                 <input placeholder="Email (optionnel)" value={contact.email} onChange={e=>setContact({...contact,email:e.target.value})}/>
                 <button className="chat-cform-btn" onClick={sendContact}>Envoyer →</button>
               </div>
@@ -615,12 +668,12 @@ function FloatingChat() {
             <div ref={endRef}/>
           </div>
           <div className="chat-foot">
-            <input className="chat-inp" value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&!e.shiftKey&&sendMsg()} placeholder="Votre question…" maxLength={500}/>
-            <button className="chat-send" onClick={sendMsg} disabled={loading||!input.trim()}>→</button>
+            <input className="chat-inp" value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&!e.shiftKey&&sendMsg()} placeholder="Votre question…" maxLength={300}/>
+            <button className="chat-send" onClick={sendMsg} disabled={!input.trim()}>→</button>
           </div>
         </div>
       )}
-      <button className="chat-btn" onClick={()=>setOpen(o=>!o)} aria-label="Assistant chat">
+      <button className="chat-btn" onClick={()=>setOpen(o=>!o)} aria-label="Chat">
         {open
           ? <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 4l12 12M16 4L4 16" stroke="#fff" strokeWidth="2" strokeLinecap="round"/></svg>
           : <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" fill="white"/></svg>
