@@ -282,15 +282,15 @@ const services=[
   {n:"04",t:"Revêtements Sol & Murs",d:"Parquet, carrelage, faïence, vinyl. Préparation et pose soignée."},
   {n:"05",t:"Fresques",d:"Création de fresques murales sur mesure, alliant art et technique."},
   {n:"06",t:"Travaux Artistiques",d:"Stucco, tadelakt, effets matière. Décoration artistique unique."},
-  {n:"07",t:"Trompe l\'Œil",d:"Trompe l\'œil architecturaux et décoratifs pour des espaces personnalisés."},
+  {n:"07",t:"Trompe l'Œil",d:"Trompe l'œil architecturaux et décoratifs pour des espaces personnalisés."},
 ];
 
 const timeline=[
   {y:"Formation",t:"Arts graphiques · Maquettiste PAO",d:"Études en arts graphiques, maquettiste PAO. Fondement artistique et technique."},
   {y:"2000–2002",t:"Peintre en entreprise",d:"Peintre dans une entreprise à Marseille. Découverte des chantiers et des techniques professionnelles."},
-  {y:"2002–2006",t:"Responsable secteur peinture",d:"Responsable du secteur peinture dans une entreprise d\'installation de bureaux. Formation en électricité, plomberie et maçonnerie à Aix-en-Provence."},
-  {y:"2006–2009",t:"Chef de chantier",d:"Chef de chantier d\'une entreprise de rénovation à Marseille."},
-  {y:"2010–2025",t:"Gérant · ARTIS RENOV",d:"Création et gérance de la société ARTIS RENOV. Rénovation, peinture artistique et travaux tous corps d\'état."},
+  {y:"2002–2006",t:"Responsable secteur peinture",d:"Responsable du secteur peinture dans une entreprise d'installation de bureaux. Formation en électricité, plomberie et maçonnerie à Aix-en-Provence."},
+  {y:"2006–2009",t:"Chef de chantier",d:"Chef de chantier d'une entreprise de rénovation à Marseille."},
+  {y:"2010–2025",t:"Gérant · ARTIS RENOV",d:"Création et gérance de la société ARTIS RENOV. Rénovation, peinture artistique et travaux tous corps d'état."},
 ];
 
 // ═══ GALERIE PAR CATÉGORIES ═══
@@ -308,8 +308,8 @@ const galCats = {
     label: "Salles de bain", icon: "🚿",
     items: [
       {img:I_SDB_APRES,       label:"Salle de bain – APRÈS douche italienne", loc:"Région PACA"},
-      {img:I_SDB1,            label:"Salle de bain épurée",                  loc:"Pays d\'Aix"},
-      {img:I_SDB2,            label:"Baignoire béton ciré",                  loc:"Pays d\'Aix"},
+      {img:I_SDB1,            label:"Salle de bain épurée",                  loc:"Pays d'Aix"},
+      {img:I_SDB2,            label:"Baignoire béton ciré",                  loc:"Pays d'Aix"},
       {img:I_SDB_TURQUOISE,   label:"Carrelage hexagonal turquoise",         loc:"Région PACA"},
       {img:I_SDB_BEIGE,       label:"Salle de bain moderne",                 loc:"Région PACA"},
         ]
@@ -317,8 +317,8 @@ const galCats = {
   chantiers: {
     label: "Chantiers", icon: "🔨",
     items: [
-      {img:I_VILLA_CHANTIER1, label:"Villa – enduit intérieur",        loc:"Pays d\'Aix"},
-      {img:I_VILLA_CHANTIER2, label:"Villa – peinture en cours",       loc:"Pays d\'Aix"},
+      {img:I_VILLA_CHANTIER1, label:"Villa – enduit intérieur",        loc:"Pays d'Aix"},
+      {img:I_VILLA_CHANTIER2, label:"Villa – peinture en cours",       loc:"Pays d'Aix"},
       {img:I_CHANTIER,        label:"Pose placo & plomberie",          loc:"Peynier"},
       {img:I_SDB_PENDANT,     label:"Pose niches placo",               loc:"Région PACA"},
       {img:I_PLACO_VOLETS,    label:"Chantier placo",                  loc:"Région PACA"},
@@ -334,11 +334,11 @@ const galCats = {
     label: "Rénovation", icon: "🏠",
     items: [
       {img:I_SALON_HABITE,    label:"Maison rénovée – séjour",         loc:"Peynier"},
-      {img:I_VILLA_APRES,     label:"Villa avec piscine – après",      loc:"Pays d\'Aix"},
+      {img:I_VILLA_APRES,     label:"Villa avec piscine – après",      loc:"Pays d'Aix"},
       {img:I_SALON1,          label:"Salon moderne",                   loc:"Aix-en-Provence"},
-      {img:I_SALON2,          label:"Salon niches LED",                loc:"Pays d\'Aix"},
-      {img:I_DSC773,          label:"Salon niches vertes",             loc:"Pays d\'Aix"},
-      {img:I_DSC769,          label:"Salon niches lumineuses",         loc:"Pays d\'Aix"},
+      {img:I_SALON2,          label:"Salon niches LED",                loc:"Pays d'Aix"},
+      {img:I_DSC773,          label:"Salon niches vertes",             loc:"Pays d'Aix"},
+      {img:I_DSC769,          label:"Salon niches lumineuses",         loc:"Pays d'Aix"},
       {img:I_SALON_BIBLIO,    label:"Salon bibliothèque",              loc:"Région PACA"},
       {img:I_CHAMBRE_MONTAGNE,label:"Chambre vue montagne",            loc:"Région PACA"},
       {img:I_SALON_POELE,     label:"Séjour avec poêle",               loc:"Région PACA"},
@@ -399,7 +399,7 @@ const galCats = {
 
 // Avant/après
 const baPairs = [
-  {avant:I_FACADE_AVANT, apres:I_FACADE_APRES,    label:"Façade — porte et volet en trompe l\'œil",               loc:"Peynier"},
+  {avant:I_FACADE_AVANT, apres:I_FACADE_APRES,    label:"Façade — porte et volet en trompe l'œil",               loc:"Peynier"},
   {avant:I_SDB_AVANT,    apres:I_SDB_APRES,        label:"Salle de bain — carrelage ancien → douche italienne",    loc:"Région PACA"},
   {avant:I_DEMOLITION,   apres:I_OUVERTURE_APRES,  label:"Gros œuvre — démolition → grande ouverture & parquet",  loc:"Région PACA"},
   {avant:I_AVANT_MAISON, apres:I_APRES_INT,         label:"Rénovation complète — maison ancienne → contemporaine", loc:"Peynier"},
@@ -408,12 +408,12 @@ const baPairs = [
 
 const tloPhotos=[
   {img:I_FACADE_AVANT,      label:"État initial – mur nu",          tag:"Avant"},
-  {img:I_FACADE_APRES,      label:"Façade – trompe l\'œil complet", tag:"Après"},
-  {img:I_TROMPE_PORTE,      label:"Porte en trompe l\'œil",         tag:"Détail"},
+  {img:I_FACADE_APRES,      label:"Façade – trompe l'œil complet", tag:"Après"},
+  {img:I_TROMPE_PORTE,      label:"Porte en trompe l'œil",         tag:"Détail"},
   {img:I_VOLET2,            label:"Détail volet peint",             tag:"Détail"},
   {img:I_RAMBARDE_PEINTURE, label:"Rambarde – en cours",            tag:"Détail"},
   {img:I_RAMBARDE_ESCALIER, label:"Rambarde & escalier",            tag:"Après"},
-  {img:I_ESCALIER_SPIRAL,   label:"Cage d\'escalier",               tag:"Après"},
+  {img:I_ESCALIER_SPIRAL,   label:"Cage d'escalier",               tag:"Après"},
 ];
 
 function BaTap({avant, apres, label, loc}) {
@@ -426,7 +426,7 @@ function BaTap({avant, apres, label, loc}) {
           <span className={`ba-tap-tag ${show?"off":"on"}`}>Avant</span>
           <span className={`ba-tap-tag ${show?"on":"off"}`}>Après</span>
         </div>
-        <button className="ba-tap-btn">{show?"👆 Voir l\'AVANT":"👆 Voir l\'APRÈS"}</button>
+        <button className="ba-tap-btn">{show?"👆 Voir l'AVANT":"👆 Voir l'APRÈS"}</button>
       </div>
       <p style={{fontSize:11,color:"#555",textAlign:"center",marginTop:8,fontStyle:"italic"}}>{label} · {loc}</p>
     </div>
@@ -581,12 +581,12 @@ export default function Site() {
       {/* HERO */}
       <div id="accueil" className="hero">
         <div className="hero-l">
-          <div className="hero-eyebrow">Artisan d\'Art · Aix-en-Provence</div>
+          <div className="hero-eyebrow">Artisan d'Art · Aix-en-Provence</div>
           <HeroTitle/>
           
-          <div className="hero-location">Peynier — Pays d\'Aix-en-Provence (13)</div>
+          <div className="hero-location">Peynier — Pays d'Aix-en-Provence (13)</div>
           <div className="hero-tags">
-            {["Rénovation Immobilière","Travaux Artistiques","Artisan d\'Art"].map(t=>(
+            {["Rénovation Immobilière","Travaux Artistiques","Artisan d'Art"].map(t=>(
               <span key={t} className="hero-tag">{t}</span>
             ))}
           </div>
@@ -594,8 +594,8 @@ export default function Site() {
           <div className="hero-logos">
             <img src={I_LOGO} alt="logo" style={{height:60,width:60,objectFit:"cover",borderRadius:"50%",flexShrink:0}}/>
             <div style={{width:1,height:50,background:"rgba(255,255,255,.15)"}}/>
-            <div className="mda-wrap">
-              <img src={I_MDA} alt="Métiers d\'Art PACA" style={{height:64,objectFit:"contain",mixBlendMode:"multiply"}}/>
+            <div className="mda-wrap" style={{background:"#fff",padding:"6px 10px",borderRadius:2}}>
+              <img src={I_MDA} alt="Métiers d'Art PACA" style={{height:56,objectFit:"contain"}}/>
             </div>
           </div>
           <div className="hero-btns">
@@ -622,7 +622,7 @@ export default function Site() {
             <div className="sec-title">Art <em>et</em> Travaux</div>
           </div>
           <p className="body-text" style={{fontStyle:"italic"}}>
-            «&nbsp;Je suis convaincu que l\'art, la décoration et la construction sont étroitement liés. Leurs méthodes reposent sur l\'obtention de bases solides pour créer une harmonie parfaite et un résultat correspondant à vos attentes.&nbsp;»
+            «&nbsp;Je suis convaincu que l'art, la décoration et la construction sont étroitement liés. Leurs méthodes reposent sur l'obtention de bases solides pour créer une harmonie parfaite et un résultat correspondant à vos attentes.&nbsp;»
           </p>
         </div>
 
@@ -655,7 +655,7 @@ export default function Site() {
             </div>
           ))}
         </div>
-        <p style={{fontSize:11,color:"#888",marginTop:10,fontStyle:"italic",textAlign:"right"}}>Cliquez sur une photo pour l\'agrandir</p>
+        <p style={{fontSize:11,color:"#888",marginTop:10,fontStyle:"italic",textAlign:"right"}}>Cliquez sur une photo pour l'agrandir</p>
       </div>
 
       {/* LIGHTBOX */}
@@ -673,7 +673,7 @@ export default function Site() {
             Simulateur de projet peinture
           </div>
           <p style={{fontSize:13,fontWeight:300,color:"rgba(255,255,255,.55)",maxWidth:460,lineHeight:1.7}}>
-            Estimez le coût de votre projet et bénéficiez d\'un <strong style={{color:"#C8973A"}}>support d\'aide au choix des couleurs</strong> grâce à notre nuancier interactif. Gratuit, sans inscription.
+            Estimez le coût de votre projet et bénéficiez d'un <strong style={{color:"#C8973A"}}>support d'aide au choix des couleurs</strong> grâce à notre nuancier interactif. Gratuit, sans inscription.
           </p>
           {["Estimation du coût de vos travaux","Nuancier interactif pour choisir vos couleurs","Aucune inscription requise"].map(f=>(
             <div key={f} className="sim-feat">{f}</div>
@@ -700,9 +700,9 @@ export default function Site() {
           ))}
         </div>
         <div className="collectif">
-          <div style={{fontSize:10,letterSpacing:".2em",textTransform:"uppercase",color:"#C8973A",marginBottom:10}}>Notre collectif d\'artisans</div>
+          <div style={{fontSize:10,letterSpacing:".2em",textTransform:"uppercase",color:"#C8973A",marginBottom:10}}>Notre collectif d'artisans</div>
           <p style={{fontSize:14,fontWeight:300,color:"#fff",lineHeight:1.85,marginBottom:14}}>
-            Nous travaillons au sein d\'un <strong style={{color:"#C8973A",fontWeight:500}}>collectif d\'artisans qualifiés</strong> qui regroupe nos expertises pour réaliser constructions, surélévations, extensions et divers travaux du bâtiment. Cela nous permet de <strong style={{color:"#fff",fontWeight:400}}>proposer des rendez-vous groupés selon les demandes concernées</strong>, garantissant une coordination optimale et la prise en charge de grands projets en toute tranquillité.
+            Nous travaillons au sein d'un <strong style={{color:"#C8973A",fontWeight:500}}>collectif d'artisans qualifiés</strong> qui regroupe nos expertises pour réaliser constructions, surélévations, extensions et divers travaux du bâtiment. Cela nous permet de <strong style={{color:"#fff",fontWeight:400}}>proposer des rendez-vous groupés selon les demandes concernées</strong>, garantissant une coordination optimale et la prise en charge de grands projets en toute tranquillité.
           </p>
           <button className="btn-gold" onClick={()=>scroll("contact")} style={{fontSize:11,padding:"10px 22px"}}>Prendre rendez-vous →</button>
         </div>
@@ -728,7 +728,7 @@ export default function Site() {
         <div className="exp-r">
           <img src={I_HERO} alt="Axel Sandahl" style={{width:"100%",flex:1,objectFit:"cover",minHeight:380}}/>
           <div className="mda-wrap" style={{padding:"10px 16px",alignSelf:"center"}}>
-            <img src={I_MDA} alt="Métiers d\'Art PACA" style={{width:220,objectFit:"contain"}}/>
+            <img src={I_MDA} alt="Métiers d'Art PACA" style={{width:220,objectFit:"contain"}}/>
           </div>
         </div>
       </div>
@@ -775,7 +775,7 @@ export default function Site() {
         <div className="ct-l">
           <div className="sec-label">05 — Nous contacter</div>
           <div className="sec-title" style={{fontSize:"clamp(2.5rem,4.5vw,4.5rem)"}}>Nous<br/><em>contacter</em></div>
-          <p className="body-text" style={{marginTop:14}}>Situés à Peynier, à proximité d\'Aix en Provence. Si vous souhaitez un devis gratuit ou obtenir des informations, n\'hésitez pas à nous contacter.</p>
+          <p className="body-text" style={{marginTop:14}}>Situés à Peynier, à proximité d'Aix en Provence. Si vous souhaitez un devis gratuit ou obtenir des informations, n'hésitez pas à nous contacter.</p>
           <div style={{marginTop:26,display:"flex",flexDirection:"column",gap:18}}>
             <div>
               <div style={{fontSize:9,letterSpacing:".2em",textTransform:"uppercase",color:"#888",marginBottom:3}}>Artisan</div>
@@ -790,7 +790,7 @@ export default function Site() {
               <a href="tel:+33616705757" style={{fontSize:15,color:"#1A1A1A",textDecoration:"none",fontWeight:300}}>06 16 70 57 57</a>
             </div>
             <div>
-              <div style={{fontSize:9,letterSpacing:".2em",textTransform:"uppercase",color:"#888",marginBottom:6}}>Zone d\'intervention</div>
+              <div style={{fontSize:9,letterSpacing:".2em",textTransform:"uppercase",color:"#888",marginBottom:6}}>Zone d'intervention</div>
               <div style={{display:"flex",flexWrap:"wrap",gap:4}}>
                 {["Peynier","Aix-en-Provence","Gardanne","Meyreuil","Fuveau","Trets","Rousset","Aubagne"].map(c=>(
                   <span key={c} className="city">{c}</span>
@@ -811,7 +811,7 @@ export default function Site() {
           </div>
         </div>
         <div className="ct-r">
-          <p className="body-text" style={{marginBottom:20}}>N\'hésitez pas à remplir le formulaire. Nous vous répondrons dans les meilleurs délais.</p>
+          <p className="body-text" style={{marginBottom:20}}>N'hésitez pas à remplir le formulaire. Nous vous répondrons dans les meilleurs délais.</p>
           {sent ? (
             <div style={{padding:14,background:"#f0fdf4",border:"1px solid #86efac",color:"#166534",fontSize:13,borderRadius:2}}>✅ Votre demande a bien été envoyée ! Nous vous recontactons sous 48h.</div>
           ) : (
@@ -828,7 +828,7 @@ export default function Site() {
                 <label style={{fontSize:9,fontWeight:500,letterSpacing:".15em",textTransform:"uppercase",color:"#888",display:"block",marginBottom:3}}>Type de travaux</label>
                 <select className="if" style={{cursor:"pointer"}}>
                   <option>Sélectionnez...</option>
-                  {["Travaux de peinture","Plâtrerie / faux plafond","Plomberie","Revêtements sol & murs","Fresque / Trompe l\'œil","Travaux artistiques","Rénovation complète","Autre"].map(o=><option key={o}>{o}</option>)}
+                  {["Travaux de peinture","Plâtrerie / faux plafond","Plomberie","Revêtements sol & murs","Fresque / Trompe l'œil","Travaux artistiques","Rénovation complète","Autre"].map(o=><option key={o}>{o}</option>)}
                 </select>
               </div>
               <div><label style={{fontSize:9,fontWeight:500,letterSpacing:".15em",textTransform:"uppercase",color:"#888",display:"block",marginBottom:3}}>Votre message</label><textarea className="if" placeholder="Décrivez votre projet..." style={{minHeight:90,resize:"vertical"}}/></div>
@@ -847,7 +847,7 @@ export default function Site() {
             <div style={{fontFamily:"'Dancing Script',cursive",fontSize:".9rem",color:"#C8973A"}}>Axel Sandahl · Peynier, Aix-en-Provence</div>
           </div>
         </div>
-        <p style={{fontSize:11,color:"#888"}}>© 2025 · Artisan d\'Art · Peynier, Aix-en-Provence (13)</p>
+        <p style={{fontSize:11,color:"#888"}}>© 2025 · Artisan d'Art · Peynier, Aix-en-Provence (13)</p>
         <div style={{display:"flex",gap:18,flexWrap:"wrap"}}>
           {["accueil","galerie","services","contact"].map(l=>(
             <span key={l} style={{fontSize:10,letterSpacing:".12em",textTransform:"uppercase",color:"#888",cursor:"pointer"}} onClick={()=>scroll(l)}>{l.charAt(0).toUpperCase()+l.slice(1)}</span>
