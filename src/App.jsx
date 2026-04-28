@@ -616,7 +616,7 @@ function FloatingChat() {
       await fetch("https://api.emailjs.com/api/v1.0/email/send", {
         method:"POST", headers:{"Content-Type":"application/json"},
         body: JSON.stringify({
-          service_id:"YOUR_SERVICE_ID", template_id:"YOUR_TEMPLATE_ID", user_id:"YOUR_PUBLIC_KEY",
+          service_id:"service_1kdzm42", template_id:"template_1vw2wy9", user_id:"io5BMwdmKvvfq8fKc",
           template_params:{ nom:contact.name, telephone:contact.phone||"—", email_client:contact.email||"—", conversation:conv }
         })
       });
