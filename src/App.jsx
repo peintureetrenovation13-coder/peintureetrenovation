@@ -86,7 +86,7 @@ body{font-family:Inter,sans-serif;background:#FAF7F2;color:#1A1A1A;overflow-x:hi
 .mob-menu button,.mob-menu a{font-size:14px;color:rgba(255,255,255,.8);text-decoration:none;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1);background:none;border-left:none;border-right:none;border-top:none;cursor:pointer;font-family:Inter;text-align:left;width:100%;letter-spacing:.05em;}
 .mob-cta{background:#C8973A!important;color:#fff!important;text-align:center!important;margin-top:12px;padding:14px!important;border:none!important;}
 .hero{display:grid;grid-template-columns:48% 52%;min-height:calc(100vh - 64px);background:#0A0A0A;}
-.hero-l{padding:4rem 4% 4rem 6%;display:flex;flex-direction:column;justify-content:center;border-right:1px solid rgba(255,255,255,.1);position:relative;}
+.hero-l{padding:4rem 4% 4rem 6%;display:flex;flex-direction:column;justify-content:center;position:relative;}
 .hero-l::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,151,58,.05) 0%,transparent 60%);pointer-events:none;}
 .hero-eyebrow{font-size:10px;letter-spacing:.25em;animation:sweepFromTop 1.4s cubic-bezier(.16,1,.3,1) .2s both;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:24px;display:flex;align-items:center;gap:12px;}
 .hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:#C8973A;}
@@ -108,10 +108,10 @@ body{font-family:Inter,sans-serif;background:#FAF7F2;color:#1A1A1A;overflow-x:hi
 .btn-outline:hover{border-color:#fff;}
 .btn-black{background:#0A0A0A;color:#fff;padding:11px 24px;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid #0A0A0A;cursor:pointer;font-family:Inter;transition:.2s;}
 .btn-black:hover{background:transparent;color:#0A0A0A;}
-.hero-r{position:relative;overflow:hidden;animation:sweepFromRight 2.2s cubic-bezier(.16,1,.3,1) .5s both;}
-.hero-r img{width:100%;height:100%;object-fit:cover;display:block;}
-.hero-r::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,10,.35) 0%,transparent 40%);}
-.hero-badge{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.12);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2);padding:8px 18px;border-radius:2px;display:flex;align-items:center;gap:10px;white-space:nowrap;z-index:2;}
+.hero-r{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:3rem 5%;animation:sweepFromRight 2.2s cubic-bezier(.16,1,.3,1) .5s both;}
+.hero-photo{width:clamp(260px,42vh,400px);height:clamp(260px,42vh,400px);border-radius:50%;overflow:hidden;border:3px solid rgba(200,151,58,.8);box-shadow:0 0 0 3px rgba(255,255,255,.2),0 24px 60px rgba(0,0,0,.35);flex-shrink:0;}
+.hero-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.hero-badge{background:rgba(255,255,255,.12);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.2);padding:8px 18px;border-radius:2px;display:flex;align-items:center;gap:10px;white-space:nowrap;}
 .dot{width:8px;height:8px;border-radius:50%;background:#4CAF50;animation:pulse 2s infinite;flex-shrink:0;}
 .sec{padding:5rem 5%;border-top:1px solid #DEDEDE;}
 .sec-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#888;margin-bottom:14px;}
@@ -600,7 +600,9 @@ export default function Site() {
           </div>
         </div>
         <div className="hero-r">
-          <img src={I_HERO} alt="Axel Sandahl peintre artisan"/>
+          <div className="hero-photo">
+            <img src={I_HERO} alt="Axel Sandahl peintre artisan"/>
+          </div>
           <div className="hero-badge">
             <div className="dot"/>
             <span style={{fontSize:12,color:"rgba(255,255,255,.85)"}}><strong style={{color:"#fff"}}>Disponible</strong> · Réponse sous 48h · Peynier</span>
