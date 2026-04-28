@@ -493,6 +493,10 @@ function HeroTitle() {
               <Comet rx={130} ry={70}  duration={1.3} delay={0.2} size={5} />
               <Comet rx={165} ry={98}  duration={2.1} delay={1.4} size={3} />
               <Comet rx={200} ry={118} duration={2.9} delay={0.5} size={3} />
+              <Comet rx={115} ry={60}  duration={1.6} delay={0.9} size={4} />
+              <Comet rx={190} ry={125} duration={3.2} delay={0.3} size={3} />
+              <Comet rx={145} ry={80}  duration={2.2} delay={1.8} size={5} />
+              <Comet rx={210} ry={100} duration={2.7} delay={1.1} size={3} />
             </div>
           </motion.div>
         )}
