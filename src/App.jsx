@@ -64,6 +64,7 @@ import I_SALON_TV_CHANTIER from "/salon_tv_chantier.jpeg";
 import I_CHAMBRE_MONTAGNE from "/chambre_montagne.jpeg";
 import I_SALON_POELE from "/salon_poele.jpeg";
 import I_OUVERTURE_APRES from "/ouverture_apres.jpeg";
+import I_BOISERIE_AA from "/boiserie_avant_apres.png";
 
 
 const G="#C8973A", BK="#0A0A0A", RL="#DEDEDE", MD="#555", LT="#888";
@@ -152,8 +153,8 @@ body{font-family:Inter,sans-serif;background:#FAF7F2;color:#1A1A1A;overflow-x:hi
 
 /* LIGHTBOX */
 .lb{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;}
-.lb-in{position:relative;max-width:92vw;max-height:92vh;display:flex;flex-direction:column;align-items:center;}
-.lb-img{max-width:100%;max-height:84vh;object-fit:contain;border-radius:2px;}
+.lb-in{position:relative;max-width:70vw;max-height:70vh;display:flex;flex-direction:column;align-items:center;}
+.lb-img{max-width:100%;max-height:64vh;object-fit:contain;border-radius:2px;}
 .lb-x{position:absolute;top:-44px;right:0;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;opacity:.8;}
 .lb-x:hover{opacity:1;}
 .lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;transition:.2s;}
@@ -269,9 +270,23 @@ body{font-family:Inter,sans-serif;background:#FAF7F2;color:#1A1A1A;overflow-x:hi
 .avis-card-stars{color:#F9A825;font-size:14px;letter-spacing:1px;}
 .avis-text{font-size:12px;font-weight:300;color:#555;line-height:1.85;font-style:italic;flex:1;}
 .avis-google-badge{display:flex;align-items:center;gap:6px;font-size:10px;color:#888;letter-spacing:.08em;margin-top:4px;}
+/* FORMULAIRE PREMIUM */
+.pf-field{display:flex;flex-direction:column;}
+.pf-label{font-size:9px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:7px;}
+.pf-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#fff;font-family:Inter;font-size:13px;padding:13px 16px;outline:none;transition:border-color .25s,background .25s;border-radius:1px;}
+.pf-input::placeholder{color:rgba(255,255,255,.2);font-style:italic;}
+.pf-input:focus{border-color:#C8973A;background:rgba(200,151,58,.04);}
+.pf-select{cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='%23C8973A' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;}
+.pf-select option{background:#1A1A1A;color:#fff;}
+.pf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.pf-textarea{min-height:100px;resize:vertical;}
+.pf-btn{background:#C8973A;color:#fff;border:none;padding:15px;font-family:Inter;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;width:100%;transition:background .25s;margin-top:4px;}
+.pf-btn:hover{background:#b08432;}
+.pf-btn:disabled{opacity:.5;cursor:not-allowed;}
+@media(max-width:768px){.pf-row{grid-template-columns:1fr;}}
 @media(max-width:768px){
   .nav{height:58px;padding:0 4%;}.nav-links{display:none;}.burger{display:flex;}.mob-menu{top:58px;}
-  .hero{grid-template-columns:1fr;min-height:auto;}.hero-l{padding:2.5rem 5% 2rem;border-right:none;}.hero-r{height:240px;}.hero-title{font-size:3.2rem;}
+  .hero{grid-template-columns:1fr;min-height:auto;}.hero-l{padding:2.5rem 5% 2rem;border-right:none;}.hero-r{height:240px;position:relative;z-index:0;}.hero-title{font-size:3.2rem;}
   .ba-wrap-grid{grid-template-columns:1fr!important;}
   .tlo-grid{grid-template-columns:1fr 1fr;}.tlo-item img{height:120px;}
   .gal-grid-3,.gal-grid-4{grid-template-columns:repeat(2,1fr);}
@@ -306,11 +321,11 @@ const services=[
 ];
 
 const timeline=[
-  {y:"Formation",t:"Arts graphiques · Maquettiste PAO",d:"Études en arts graphiques, maquettiste PAO. Fondement artistique et technique."},
-  {y:"2000–2002",t:"Peintre en entreprise",d:"Peintre dans une entreprise à Marseille. Découverte des chantiers et des techniques professionnelles."},
-  {y:"2002–2006",t:"Responsable secteur peinture",d:"Responsable du secteur peinture dans une entreprise d'installation de bureaux. Formation en électricité, plomberie et maçonnerie à Aix-en-Provence."},
-  {y:"2006–2009",t:"Chef de chantier",d:"Chef de chantier d'une entreprise de rénovation à Marseille."},
   {y:"2010–2025",t:"Gérant · ARTIS RENOV",d:"Création et gérance de la société ARTIS RENOV. Rénovation, peinture artistique et travaux tous corps d'état."},
+  {y:"2006–2009",t:"Chef de chantier",d:"Chef de chantier d'une entreprise de rénovation à Marseille."},
+  {y:"2002–2006",t:"Responsable secteur peinture",d:"Responsable du secteur peinture dans une entreprise d'installation de bureaux. Formation en électricité, plomberie et maçonnerie à Aix-en-Provence."},
+  {y:"2000–2002",t:"Peintre en entreprise",d:"Peintre dans une entreprise à Marseille. Découverte des chantiers et des techniques professionnelles."},
+  {y:"Formation",t:"Arts graphiques · Maquettiste PAO",d:"Études en arts graphiques, maquettiste PAO. Fondement artistique et technique."},
 ];
 
 // ═══ GALERIE PAR CATÉGORIES ═══
@@ -381,6 +396,7 @@ const galCats = {
       {img:I_RAMBARDE_PEINTURE, label:"Rambarde – peinture en cours",   loc:"Région PACA"},
       {img:I_RAMBARDE_ESCALIER, label:"Rambarde & escalier",            loc:"Région PACA"},
       {img:I_ESCALIER_SPIRAL,   label:"Cage d'escalier",               loc:"Région PACA"},
+      {img:I_BOISERIE_AA,       label:"Boiserie – illusion parfaite",   loc:"Peynier"},
     ]
   },
   avantapres: {
@@ -396,6 +412,7 @@ const galCats = {
       {img:I_APRES_INT,      label:"Rénovation maison – APRÈS",                loc:"Peynier"},
       {img:I_FRIGOGRAFF,     label:"Frigos – AVANT graffiti",                  loc:"Atelier",   pair:I_FRIGO_APRES,   pairLabel:"Frigos – APRÈS graffiti"},
       {img:I_FRIGO_APRES,    label:"Frigos – APRÈS graffiti",                  loc:"Atelier"},
+      {img:I_BOISERIE_AA,    label:"Boiserie – Trompe l'œil avant/après",     loc:"Peynier"},
     ]
   },
   art: {
@@ -1039,39 +1056,63 @@ export default function Site() {
             <div>
               <div style={{fontSize:9,letterSpacing:".2em",textTransform:"uppercase",color:"#888",marginBottom:6}}>Instagram</div>
               <a href="https://www.instagram.com" target="_blank" rel="noreferrer" style={{textDecoration:"none",display:"flex",alignItems:"center",gap:10}}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="2" width="20" height="20" rx="5" stroke="#0A0A0A" strokeWidth="1.8"/>
-                  <circle cx="12" cy="12" r="4.5" stroke="#0A0A0A" strokeWidth="1.8"/>
-                  <circle cx="17.5" cy="6.5" r="1" fill="#0A0A0A"/>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="ig-grad" x1="0" y1="24" x2="24" y2="0" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stopColor="#f09433"/>
+                      <stop offset="0.25" stopColor="#e6683c"/>
+                      <stop offset="0.5" stopColor="#dc2743"/>
+                      <stop offset="0.75" stopColor="#cc2366"/>
+                      <stop offset="1" stopColor="#bc1888"/>
+                    </linearGradient>
+                  </defs>
+                  <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#ig-grad)" strokeWidth="1.8"/>
+                  <circle cx="12" cy="12" r="4.5" stroke="url(#ig-grad)" strokeWidth="1.8"/>
+                  <circle cx="17.5" cy="6.5" r="1" fill="url(#ig-grad)"/>
                 </svg>
                 <span style={{fontSize:14,color:"#1A1A1A",fontWeight:300}}>Suivez nos réalisations</span>
               </a>
             </div>
           </div>
         </div>
-        <div className="ct-r">
-          <p className="body-text" style={{marginBottom:20}}>N'hésitez pas à remplir le formulaire. Nous vous répondrons dans les meilleurs délais.</p>
+        <div className="ct-r" style={{background:"#0A0A0A"}}>
+          <p style={{marginBottom:24,fontSize:12,fontWeight:300,color:"rgba(255,255,255,.5)",lineHeight:1.85}}>N'hésitez pas à remplir le formulaire. Nous vous répondrons dans les meilleurs délais.</p>
           {sent ? (
-            <div style={{padding:14,background:"#f0fdf4",border:"1px solid #86efac",color:"#166534",fontSize:13,borderRadius:2}}>✅ Votre demande a bien été envoyée ! Nous vous recontactons sous 48h.</div>
+            <div style={{padding:"20px 24px",background:"rgba(200,151,58,.08)",border:"1px solid rgba(200,151,58,.4)",color:"#C8973A",fontSize:13,borderRadius:1}}>✓ Votre demande a bien été envoyée — nous vous recontactons sous 48h.</div>
           ) : (
-            <form onSubmit={sub} style={{display:"flex",flexDirection:"column",gap:12}}>
-              <div className="cf-row">
-                <div><label style={{fontSize:9,fontWeight:500,letterSpacing:".15em",textTransform:"uppercase",color:"#888",display:"block",marginBottom:3}}>Prénom</label><input className="if" type="text" placeholder="Jean" required/></div>
-                <div><label style={{fontSize:9,fontWeight:500,letterSpacing:".15em",textTransform:"uppercase",color:"#888",display:"block",marginBottom:3}}>Nom</label><input className="if" type="text" placeholder="Dupont" required/></div>
+            <form onSubmit={sub} style={{display:"flex",flexDirection:"column",gap:14}}>
+              <div className="pf-row">
+                <div className="pf-field">
+                  <label className="pf-label">Prénom</label>
+                  <input className="pf-input" type="text" placeholder="Jean" required/>
+                </div>
+                <div className="pf-field">
+                  <label className="pf-label">Nom</label>
+                  <input className="pf-input" type="text" placeholder="Dupont" required/>
+                </div>
               </div>
-              <div className="cf-row">
-                <div><label style={{fontSize:9,fontWeight:500,letterSpacing:".15em",textTransform:"uppercase",color:"#888",display:"block",marginBottom:3}}>Téléphone</label><input className="if" type="tel" placeholder="06 00 00 00 00" required/></div>
-                <div><label style={{fontSize:9,fontWeight:500,letterSpacing:".15em",textTransform:"uppercase",color:"#888",display:"block",marginBottom:3}}>Email</label><input className="if" type="email" placeholder="jean@exemple.fr" required/></div>
+              <div className="pf-row">
+                <div className="pf-field">
+                  <label className="pf-label">Téléphone</label>
+                  <input className="pf-input" type="tel" placeholder="06 00 00 00 00" required/>
+                </div>
+                <div className="pf-field">
+                  <label className="pf-label">Email</label>
+                  <input className="pf-input" type="email" placeholder="jean@exemple.fr" required/>
+                </div>
               </div>
-              <div>
-                <label style={{fontSize:9,fontWeight:500,letterSpacing:".15em",textTransform:"uppercase",color:"#888",display:"block",marginBottom:3}}>Type de travaux</label>
-                <select className="if" style={{cursor:"pointer"}}>
-                  <option>Sélectionnez...</option>
+              <div className="pf-field">
+                <label className="pf-label">Type de travaux</label>
+                <select className="pf-input pf-select">
+                  <option value="">Sélectionnez...</option>
                   {["Travaux de peinture","Plâtrerie / faux plafond","Plomberie","Revêtements sol & murs","Fresque / Trompe l'œil","Travaux artistiques","Rénovation complète","Autre"].map(o=><option key={o}>{o}</option>)}
                 </select>
               </div>
-              <div><label style={{fontSize:9,fontWeight:500,letterSpacing:".15em",textTransform:"uppercase",color:"#888",display:"block",marginBottom:3}}>Votre message</label><textarea className="if" placeholder="Décrivez votre projet..." style={{minHeight:90,resize:"vertical"}}/></div>
-              <button type="submit" disabled={sending} style={{background:"#0A0A0A",color:"#fff",border:"1.5px solid #0A0A0A",padding:13,fontFamily:"Inter",fontSize:11,fontWeight:500,letterSpacing:".15em",textTransform:"uppercase",cursor:"pointer"}}>{sending?"Envoi...":"Envoyer →"}</button>
+              <div className="pf-field">
+                <label className="pf-label">Votre message</label>
+                <textarea className="pf-input pf-textarea" placeholder="Décrivez votre projet..."/>
+              </div>
+              <button type="submit" className="pf-btn" disabled={sending}>{sending?"Envoi en cours...":"Envoyer la demande →"}</button>
             </form>
           )}
         </div>
