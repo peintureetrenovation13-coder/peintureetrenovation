@@ -142,7 +142,7 @@ body{font-family:Inter,sans-serif;background:#FAF7F2;color:#1A1A1A;overflow-x:hi
 /* GRILLE PHOTOS */
 .gal-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding-top:20px;}
 .gal-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding-top:20px;}
-.gc{position:relative;overflow:hidden;cursor:pointer;border-radius:2px;aspect-ratio:1;}
+.gc{position:relative;overflow:hidden;cursor:pointer;border-radius:2px;height:200px;}
 .gc img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.25,.46,.45,.94);}
 .gc:hover img{transform:scale(1.06);}
 .gc-ov{position:absolute;inset:0;background:rgba(0,0,0,.38);opacity:0;transition:.3s;display:flex;align-items:center;justify-content:center;font-size:22px;}
@@ -153,8 +153,8 @@ body{font-family:Inter,sans-serif;background:#FAF7F2;color:#1A1A1A;overflow-x:hi
 
 /* LIGHTBOX */
 .lb{position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;}
-.lb-in{position:relative;max-width:70vw;max-height:70vh;display:flex;flex-direction:column;align-items:center;}
-.lb-img{max-width:100%;max-height:64vh;object-fit:contain;border-radius:2px;}
+.lb-in{position:relative;max-width:85vw;max-height:85vh;display:flex;flex-direction:column;align-items:center;}
+.lb-img{max-width:100%;max-height:85vh;object-fit:contain;border-radius:2px;}
 .lb-x{position:absolute;top:-44px;right:0;background:none;border:none;color:#fff;font-size:28px;cursor:pointer;opacity:.8;}
 .lb-x:hover{opacity:1;}
 .lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;transition:.2s;}
@@ -235,6 +235,9 @@ body{font-family:Inter,sans-serif;background:#FAF7F2;color:#1A1A1A;overflow-x:hi
 .chat-cform-btn:hover{background:#C8973A;}
 .chat-coords-btn{align-self:flex-start;background:none;border:1px solid #C8973A;color:#C8973A;padding:6px 12px;font-size:11px;font-family:Inter;cursor:pointer;border-radius:2px;letter-spacing:.06em;transition:.2s;}
 .chat-coords-btn:hover{background:#C8973A;color:#fff;}
+.chat-quick-btns{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px;}
+.chat-quick-btn{background:none;border:1px solid rgba(200,151,58,.5);color:#C8973A;padding:6px 11px;font-size:11px;font-family:Inter;cursor:pointer;border-radius:2px;letter-spacing:.04em;transition:.2s;text-align:left;}
+.chat-quick-btn:hover{background:#C8973A;color:#fff;border-color:#C8973A;}
 /* Featured photo */
 .cat-featured{width:100%;height:240px;overflow:hidden;border-radius:2px;margin-top:16px;margin-bottom:8px;position:relative;cursor:pointer;}
 .cat-featured img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.25,.46,.45,.94);}
@@ -552,117 +555,90 @@ const avis = [
   { name:"Anne-Claire C.", date:"il y a 3 mois", stars:5, text:"Excellent artisan très méticuleux, ponctuel et sympathique. Je suis enchantée par sa prestation !" },
 ];
 
-const CHAT_RULES = [
-  { keys:["bonjour","bonsoir","salut","coucou","hello","bjr"],
-    reply:"Bonjour ! Bienvenue chez Peinture & Rénovation. Comment puis-je vous aider ?" },
-  { keys:["peinture","peindre","peintre","intérieur","extérieur","façade","ravalement"],
-    reply:"Nous réalisons tous travaux de peinture : intérieure, extérieure, ravalement de façade, préparation des supports et finitions haut de gamme.\nSouhaitez-vous demander un devis ?",
-    ctx:"service" },
-  { keys:["plâtrerie","placo","cloison","faux plafond","enduit","lissage","ragréage"],
-    reply:"Nous intervenons en plâtrerie : cloisons, faux plafonds, enduits de lissage, ragréage et rebouchage.\nSouhaitez-vous un devis ?",
-    ctx:"service" },
-  { keys:["plomberie","plombier","douche","baignoire","robinet","tuyau"],
-    reply:"Nous prenons en charge la plomberie dans le cadre de rénovations complètes.\nSouhaitez-vous en savoir plus ou demander un devis ?",
-    ctx:"service" },
-  { keys:["revêtement","carrelage","parquet","faïence","vinyl","sol","dallage"],
-    reply:"Nous posons tous revêtements sol et murs : parquet, carrelage, faïence, vinyl.\nSouhaitez-vous un devis ?",
-    ctx:"service" },
-  { keys:["fresque","murale","peinture murale"],
-    reply:"Nous créons des fresques murales sur mesure, alliant art et technique.\nSouhaitez-vous un devis ?",
-    ctx:"service" },
-  { keys:["trompe","trompe l'œil","trompe l'oeil","décor peint"],
-    reply:"Nous réalisons des trompe l'œil architecturaux et décoratifs : volumes, volets peints, perspectives.\nSouhaitez-vous un devis ?",
-    ctx:"service" },
-  { keys:["stucco","tadelakt","béton ciré","effet matière","artistique","décoration"],
-    reply:"Nos travaux artistiques incluent stucco, tadelakt, effets matière et décoration sur mesure.\nSouhaitez-vous un devis ?",
-    ctx:"service" },
-  { keys:["devis","prix","tarif","budget","coût","estimation","combien","cher"],
-    reply:"Pour vous préparer une estimation personnalisée, j'ai besoin de quelques informations.\n\n① Quel type de travaux souhaitez-vous réaliser ?\n(peinture, plâtrerie, rénovation, artistique…)",
-    startDevis:true },
-  { keys:["disponible","disponibilité","délai","quand","urgent","rapidement"],
-    reply:"Pour nos disponibilités exactes, appelez le 06 16 70 57 57. Vous pouvez aussi laisser vos coordonnées pour être rappelé(e) sous 48h.",
-    ctx:"dispo", cta:true },
-  { keys:["maçonnerie","maçon","électricité","électricien","menuiserie","menuisier","charpente","isolation","toiture"],
-    reply:"Nous travaillons avec un collectif d'artisans qualifiés : maçons, électriciens, menuisiers et bien d'autres.\nSouhaitez-vous nous contacter pour en discuter ?",
-    ctx:"collectif", cta:true },
-  { keys:["zone","secteur","peynier","aix","gardanne","meyreuil","fuveau","trets","aubagne","marseille"],
-    reply:"Nous intervenons sur Peynier, Aix-en-Provence, Gardanne, Meyreuil, Fuveau, Trets, Rousset et Aubagne." },
-  { keys:["contact","appeler","rappel","rappeler","coordonnées","rdv","rendez-vous","intéressé"],
-    reply:"Laissez vos coordonnées ci-dessous et nous vous rappellerons dans les meilleurs délais !",
-    cta:true },
-  { keys:["merci","parfait","excellent","nickel"],
-    reply:"Merci ! N'hésitez pas si vous avez d'autres questions. Nous sommes disponibles du lundi au samedi." },
-];
-
-const CONFIRM_RE = /^(oui|ok|yes|d'accord|bien sur|volontiers|avec plaisir|allez|absolument|tout a fait|exactement|je confirme|c'est ca|c est ca|pourquoi pas)[\s!.]*$/;
-
-function matchRule(text) {
-  const t = text.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
-  for (const r of CHAT_RULES) {
-    if (r.keys.some(k => t.includes(k.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")))) return r;
-  }
-  return null;
-}
+const HAS = (t, ...words) => words.some(w => t.includes(w));
 
 const renderText = (text) => text.split("\n").map((line, i, arr) => (
   <span key={i}>{line}{i < arr.length - 1 && <br/>}</span>
 ));
 
 function FloatingChat() {
-  const [open, setOpen]             = useState(false);
-  const [msgs, setMsgs]             = useState([{ from:"bot", text:"Bonjour ! Je suis l'assistant de Peinture & Rénovation. Comment puis-je vous aider ?" }]);
-  const [input, setInput]           = useState("");
-  const [typing, setTyping]         = useState(false);
-  const [showCForm, setShowCForm]   = useState(false);
-  const [pendingCTA, setPendingCTA] = useState(false);
-  const [contact, setContact]       = useState({ name:"", phone:"", email:"" });
+  const [open, setOpen]               = useState(false);
+  const [msgs, setMsgs]               = useState([]);
+  const [input, setInput]             = useState("");
+  const [typing, setTyping]           = useState(false);
+  const [showCForm, setShowCForm]     = useState(false);
+  const [pendingCTA, setPendingCTA]   = useState(false);
+  const [contact, setContact]         = useState({ name:"", phone:"", email:"" });
   const [contactSent, setContactSent] = useState(false);
-  const [ctx, setCtx]               = useState(null);
-  const [devisStep, setDevisStep]   = useState(null);
-  const [devisData, setDevisData]   = useState({ type:"", surface:"", zone:"" });
+  const [phase, setPhase]             = useState("welcome");
+  const [devisData, setDevisData]     = useState({ type:"", desc:"", ville:"" });
+  const [quickBtns, setQuickBtns]     = useState(null);
   const endRef = useRef(null);
 
-  useEffect(() => { endRef.current?.scrollIntoView({ behavior:"smooth" }); }, [msgs, typing, showCForm]);
+  useEffect(() => {
+    setMsgs([{ from:"bot", text:"Bonjour et bienvenue chez Peinture & Rénovation ! Je suis l'assistant d'Axel. Comment puis-je vous aider aujourd'hui ?" }]);
+    setQuickBtns([
+      { label:"Demander un devis", action:"devis" },
+      { label:"Nos services",      action:"services" },
+      { label:"Nous appeler",      action:"appeler" },
+    ]);
+  }, []);
+
+  useEffect(() => { endRef.current?.scrollIntoView({ behavior:"smooth" }); }, [msgs, typing, showCForm, quickBtns]);
 
   const botReply = (text, opts = {}) => {
-    const { cta=false, newCtx=undefined, startDevis=false } = opts;
+    const { cta=false, btns=null, newPhase=undefined } = opts;
     setTyping(true);
+    setQuickBtns(null);
     setTimeout(() => {
       setMsgs(p => [...p, { from:"bot", text }]);
       setTyping(false);
       if (cta) setPendingCTA(true);
-      if (newCtx !== undefined) setCtx(newCtx);
-      if (startDevis) setDevisStep(1);
-    }, 700 + Math.random() * 400);
+      if (btns) setQuickBtns(btns);
+      if (newPhase !== undefined) setPhase(newPhase);
+    }, 600 + Math.random() * 300);
   };
 
-  const handleDevisStep = (txt) => {
-    if (devisStep === 1) {
-      setDevisData(d => ({...d, type:txt}));
-      setDevisStep(2);
-      botReply("② Pouvez-vous m'indiquer la surface approximative (en m²) ou décrire brièvement l'espace concerné ?");
-    } else if (devisStep === 2) {
-      setDevisData(d => ({...d, surface:txt}));
-      setDevisStep(3);
-      botReply("③ Dans quelle commune se situe le chantier ?\nNous intervenons sur Peynier, Aix-en-Provence, Gardanne, Meyreuil, Fuveau, Trets, Rousset et Aubagne.");
-    } else if (devisStep === 3) {
-      setDevisData(d => ({...d, zone:txt}));
-      setDevisStep(4);
-      botReply("Parfait ! Pour finaliser votre demande, vous pouvez :\n• Laisser vos coordonnées ci-dessous → rappel sous 48h\n• Ou appeler directement le 06 16 70 57 57", { cta:true, newCtx:"devis_done" });
-    }
-  };
+  const TYPE_BTNS = [
+    { label:"Peinture int. / ext.", action:"type_peinture" },
+    { label:"Rénovation",           action:"type_reno" },
+    { label:"Travaux artistiques",  action:"type_art" },
+    { label:"Autre",                action:"type_autre" },
+  ];
 
-  const handleConfirm = () => {
-    if (ctx === "service") {
-      botReply("Super ! Pour vous préparer une estimation, j'ai besoin de quelques informations.\n\n① Quel type de travaux souhaitez-vous réaliser ?\n(peinture, plâtrerie, rénovation, artistique…)", { startDevis:true, newCtx:"devis" });
-    } else if (ctx === "dispo") {
-      botReply("Laissez vos coordonnées ci-dessous et nous vous rappellerons pour caler un rendez-vous !", { cta:true });
-    } else if (ctx === "devis") {
-      botReply("① Quel type de travaux souhaitez-vous réaliser ?\n(peinture, plâtrerie, rénovation, artistique…)", { startDevis:true });
-    } else if (ctx === "collectif") {
-      botReply("Laissez vos coordonnées et nous vous recontacterons avec les bons artisans selon votre projet !", { cta:true });
-    } else {
-      botReply("D'accord ! Puis-je vous aider sur autre chose ? Nos services couvrent la peinture, plâtrerie, plomberie, revêtements, fresques et travaux artistiques.");
+  const handleQuickBtn = (action) => {
+    setQuickBtns(null);
+    if (action === "devis") {
+      setMsgs(p => [...p, { from:"user", text:"Demander un devis" }]);
+      botReply("Avec grand plaisir ! Pour vous préparer un devis personnalisé, j'ai besoin de quelques infos. Commençons par le type de travaux :", { btns:TYPE_BTNS, newPhase:"devis_1" });
+
+    } else if (action === "services") {
+      setMsgs(p => [...p, { from:"user", text:"Nos services" }]);
+      botReply(
+        "Voici ce que nous réalisons :\n• Peinture intérieure & extérieure\n• Plâtrerie, enduits, ragréage\n• Revêtements sol & murs\n• Plomberie dans le cadre de rénovations\n• Fresques murales & trompe l'œil\n• Travaux artistiques sur mesure\n\nNous faisons partie d'un groupe d'artisans qui ont l'habitude de travailler ensemble et connaissons les points importants pour la bonne réalisation d'un projet — de la peinture au gros œuvre, nous coordonnons tout pour vous.\n\nVous avez quelque chose en tête ?",
+        { btns:[{ label:"Demander un devis", action:"devis" }, { label:"Estimer le coût", action:"simulateur" }], newPhase:"chat" }
+      );
+
+    } else if (action === "appeler") {
+      setMsgs(p => [...p, { from:"user", text:"Nous appeler" }]);
+      botReply("Bien sûr ! Axel est joignable directement au 06 16 70 57 57, du lundi au samedi. Il prend le temps d'écouter chaque projet et sera ravi d'échanger avec vous !", { newPhase:"chat" });
+
+    } else if (action.startsWith("type_")) {
+      const labels = { type_peinture:"Peinture int. / ext.", type_reno:"Rénovation", type_art:"Travaux artistiques", type_autre:"Autre" };
+      const label = labels[action];
+      setMsgs(p => [...p, { from:"user", text:label }]);
+      setDevisData(d => ({...d, type:label}));
+      botReply("Super choix ! Pour mieux cerner votre projet, pouvez-vous nous donner quelques détails ? (ex : refaire le salon, ravalement de façade, fresque dans l'entrée...)", { newPhase:"devis_2" });
+
+    } else if (action === "simulateur") {
+      setMsgs(p => [...p, { from:"user", text:"Estimer le coût" }]);
+      botReply(
+        "Notre simulateur gratuit est disponible juste en dessous sur cette page — il vous donne une estimation personnalisée en 2 minutes !\n\nEt si vous préférez en parler directement, Axel peut vous rappeler : laissez votre nom et numéro ci-dessous, ou appelez-le au 06 16 70 57 57 !",
+        { cta:true, newPhase:"chat" }
+      );
+
+    } else if (action === "rappel") {
+      setPendingCTA(true);
     }
   };
 
@@ -671,46 +647,79 @@ function FloatingChat() {
     if (!txt) return;
     setMsgs(p => [...p, { from:"user", text:txt }]);
     setInput("");
-    const stripped = txt.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").trim();
+    const t = txt.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
 
-    if (/\b(annuler|stop|quitter|abandon|non)\b/.test(stripped) && devisStep !== null) {
-      setDevisStep(null);
-      botReply("Pas de souci ! Y a-t-il autre chose que je puisse faire pour vous ?", { newCtx:null });
+    if (phase === "devis_1") {
+      setDevisData(d => ({...d, type:txt}));
+      botReply("Super ! Pouvez-vous nous décrire votre projet en quelques mots ?", { newPhase:"devis_2" });
       return;
     }
-    if (devisStep !== null && devisStep < 4) {
-      handleDevisStep(txt);
+    if (phase === "devis_2") {
+      setDevisData(d => ({...d, desc:txt}));
+      botReply("Très bien, on y est presque ! Dans quelle ville se situe le chantier ?", { newPhase:"devis_3" });
       return;
     }
-    if (CONFIRM_RE.test(stripped) && ctx !== null) {
-      handleConfirm();
+    if (phase === "devis_3") {
+      setDevisData(d => ({...d, ville:txt}));
+      botReply(
+        "Parfait, merci pour ces informations ! Pour avoir une idée du budget, notre simulateur gratuit est disponible juste en dessous — essayez-le, c'est rapide et sans engagement !\n\nEt si vous préférez en discuter de vive voix, Axel est là pour ça. Laissez-nous vos coordonnées ou appelez le 06 16 70 57 57 !",
+        { cta:true, btns:[{ label:"Me faire rappeler", action:"rappel" }], newPhase:"chat" }
+      );
       return;
     }
-    const rule = matchRule(txt);
-    if (rule) {
-      botReply(rule.reply, { cta:!!rule.cta, newCtx:rule.startDevis ? "devis" : (rule.ctx||null), startDevis:!!rule.startDevis });
+
+    if (HAS(t,"prix","budget","cout","tarif","combien","cher","estimation","simulateur")) {
+      botReply(
+        "Pour avoir une idée du budget, notre simulateur gratuit est disponible juste en dessous sur cette page — il vous donne une fourchette personnalisée en 2 minutes, sans engagement !\n\nEt si vous souhaitez qu'Axel vous rappelle pour en discuter, laissez-nous vos coordonnées ou appelez le 06 16 70 57 57 !",
+        { cta:true }
+      );
+    } else if (HAS(t,"electr","macon","charpent","isolat","toiture","menuiser","terrassement")) {
+      botReply("Pas de souci ! Nous faisons partie d'un groupe d'artisans qui ont l'habitude de travailler ensemble et connaissons les points importants pour la bonne réalisation d'un projet — de la peinture au gros œuvre, nous coordonnons tout pour vous.\n\nSouhaitez-vous qu'on vous rappelle pour en discuter ?", { cta:true });
+    } else if (HAS(t,"fresque","murale","trompe","artistique","stucco","tadelakt","beton cire")) {
+      botReply("Les travaux artistiques, c'est vraiment le cœur de métier d'Axel ! Fresques murales, trompe l'œil, stucco, béton ciré... chaque réalisation est unique et transforme complètement un espace.\n\nVous souhaitez un devis pour ce type de projet ?", { btns:[{ label:"Demander un devis", action:"devis" }] });
+    } else if (HAS(t,"devis","projet","travaux","renover","renovation","peindre","peinture","placo","carrelage","parquet")) {
+      botReply("Avec plaisir ! Commençons par le type de travaux qui vous intéresse :", { btns:TYPE_BTNS, newPhase:"devis_1" });
+    } else if (HAS(t,"interesse","appel","rappel","contact","rdv","rendez","coordonnee","joindre")) {
+      botReply("Avec plaisir ! Axel aime prendre le temps de bien comprendre chaque projet. Appelez-le directement au 06 16 70 57 57, ou laissez vos coordonnées ci-dessous et il vous rappelle sous 48h !", { cta:true });
+    } else if (HAS(t,"disponible","disponibilite","delai","quand","urgent")) {
+      botReply("Les plannings se remplissent vite ! Pour connaître nos disponibilités exactes, le plus simple est d'appeler Axel au 06 16 70 57 57. Vous pouvez aussi laisser vos coordonnées et il vous rappelle sous 48h !", { cta:true });
+    } else if (HAS(t,"peynier","aix","gardanne","meyreuil","fuveau","trets","aubagne","marseille","zone","secteur")) {
+      botReply("Nous intervenons principalement sur Peynier, Aix-en-Provence, Gardanne, Meyreuil, Fuveau, Trets, Rousset et Aubagne. Si votre projet est dans ce secteur, nous serions ravis d'en discuter !");
+    } else if (HAS(t,"bonjour","bonsoir","salut","hello","coucou")) {
+      botReply("Bonjour, bienvenue chez Peinture & Rénovation ! Ravi de vous accueillir. Qu'est-ce qui nous vaut le plaisir de votre visite ?", { btns:[{ label:"Demander un devis", action:"devis" }, { label:"Nos services", action:"services" }] });
+    } else if (HAS(t,"merci","super","parfait","excellent","nickel","top")) {
+      botReply("Merci à vous, c'est un plaisir ! N'hésitez pas à revenir si vous avez d'autres questions — nous sommes disponibles du lundi au samedi. À bientôt !");
     } else {
-      botReply("Je ne suis pas sûr de comprendre. Vous pouvez nous appeler au 06 16 70 57 57 ou utiliser le formulaire en bas de page.");
+      botReply("Hmm, je ne suis pas sûr de bien vous suivre sur ce point ! Pour toute question, vous pouvez appeler Axel au 06 16 70 57 57 — ou utiliser le formulaire de contact en bas de page. Il sera heureux de vous répondre !", {
+        btns:[{ label:"Demander un devis", action:"devis" }, { label:"Nous appeler", action:"appeler" }]
+      });
     }
   };
 
   const sendContact = async () => {
     if (!contact.name.trim() || (!contact.phone.trim() && !contact.email.trim())) return;
-    const devisSummary = devisData.type
-      ? `Devis : ${devisData.type}${devisData.surface ? ` | Surface : ${devisData.surface}` : ""}${devisData.zone ? ` | Zone : ${devisData.zone}` : ""}\n\n`
+    const summary = devisData.type
+      ? `Projet : ${devisData.type}${devisData.desc ? ` — ${devisData.desc}` : ""}${devisData.ville ? ` (${devisData.ville})` : ""}\n\n`
       : "";
     const conv = msgs.map(m=>`${m.from==="user"?"Client":"Assistant"}: ${m.text}`).join("\n");
+    const payload = {
+      service_id:"service_1kdzm42", template_id:"template_1vw2wy9", user_id:"io5BMwdmKvvfq8fKc",
+      template_params:{ nom:contact.name, telephone:contact.phone||"—", email_client:contact.email||"—", conversation: summary + conv }
+    };
+    console.log("[ChatBot] Envoi EmailJS :", payload.template_params);
     try {
-      await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
         method:"POST", headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({
-          service_id:"service_1kdzm42", template_id:"template_1vw2wy9", user_id:"io5BMwdmKvvfq8fKc",
-          template_params:{ nom:contact.name, telephone:contact.phone||"—", email_client:contact.email||"—", conversation: devisSummary + conv }
-        })
+        body: JSON.stringify(payload)
       });
-    } catch {}
+      const resText = await res.text();
+      if (res.ok) { console.log("[ChatBot] EmailJS OK :", resText); }
+      else { console.error("[ChatBot] EmailJS erreur", res.status, resText); }
+    } catch(err) {
+      console.error("[ChatBot] Erreur réseau :", err);
+    }
     setContactSent(true); setShowCForm(false); setPendingCTA(false);
-    botReply(`Merci ${contact.name.split(" ")[0]} ! Vos coordonnées ont bien été reçues, nous vous rappellerons très rapidement.`);
+    setMsgs(p => [...p, { from:"bot", text:`Merci ${contact.name.split(" ")[0]} ! Vos coordonnées ont bien été reçues, Axel vous rappellera très rapidement.` }]);
   };
 
   return (
@@ -739,6 +748,13 @@ function FloatingChat() {
             {typing && (
               <div className="chat-msg-bot" style={{display:"flex",gap:5,alignItems:"center",padding:"12px 14px"}}>
                 {[0,.25,.5].map(d=><span key={d} style={{width:7,height:7,borderRadius:"50%",background:"#C8973A",display:"inline-block",animation:`pulse 1.1s ${d}s infinite`}}/>)}
+              </div>
+            )}
+            {quickBtns && !typing && (
+              <div className="chat-quick-btns">
+                {quickBtns.map(b => (
+                  <button key={b.action} className="chat-quick-btn" onClick={()=>handleQuickBtn(b.action)}>{b.label}</button>
+                ))}
               </div>
             )}
             {pendingCTA && !showCForm && !contactSent && (
